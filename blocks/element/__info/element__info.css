@@ -1,0 +1,9 @@
+@import url(./_like/element__info_like.css);
+@import url(./_title/element__info_title.css);
+.element__info{
+    display: grid;
+  grid-template-columns: 86% 14%;
+  grid-template-rows: 1fr;
+  grid-template-areas: "title like";
+  grid-area: info;
+}

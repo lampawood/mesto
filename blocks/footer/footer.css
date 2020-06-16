@@ -1,0 +1,9 @@
+@import url(./__copyright/footer__copyright.css);
+.footer{
+    padding: 66px 0 60px;
+}
+@media (max-width:881px){
+    .footer{
+        padding:48px 19px 36px;
+    }
+}

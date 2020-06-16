@@ -1,0 +1,11 @@
+@import url(./__info/element__info.css);
+@import url(./__item/element__item.css);
+.element{
+    max-width: 282px;
+    background-color: white;
+border-radius: 3%;
+display: grid;
+grid-template-columns: 1fr;
+grid-template-rows: 282px 80px;
+grid-template-areas: "photo" "info";
+}

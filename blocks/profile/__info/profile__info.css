@@ -1,0 +1,11 @@
+.profile__info{
+display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "title" 
+  "subtitle";
+  grid-area: info;
+  max-height: 120px;
+  max-width: 295px;
+  padding-left: 7%;
+}
