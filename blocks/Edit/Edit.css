@@ -1,4 +1,4 @@
-.Edit{
+.edit{
     grid-area: Edit;
     background-color: black;
     width: 24px;
@@ -11,12 +11,12 @@
     background: url(../../images/pen.svg) no-repeat center;
 
 }
-.Edit:hover{
+.edit:hover{
     opacity: 0.8;
     cursor: pointer;
 }
 @media (max-width:881px){
-    .Edit{
+    .edit{
         right: 0;
         width: 18px;
         height: 18px;

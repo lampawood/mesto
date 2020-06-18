@@ -1,6 +1,6 @@
-@import url(./__info/element__info.css);
-@import url(./__item/element__item.css);
-.element{
+@import url(./__info/card__info.css);
+@import url(./__item/card__item.css);
+.card{
     max-width: 282px;
     background-color: white;
 border-radius: 3%;

@@ -1,4 +1,4 @@
-.Add{
+.add{
     grid-area: Add;
     background-color: black;
     border: 2px solid #FFFFFF;
@@ -12,12 +12,12 @@
     left: 56%;
     background: url("../../images/Add.svg") no-repeat center;
 }
-.Add:hover{
+.add:hover{
     opacity: 0.8;
     cursor: pointer;
 }
 @media (max-width:881px){
-    .Add{
+    .add{
         width: 282px;
         left: 0;
     }

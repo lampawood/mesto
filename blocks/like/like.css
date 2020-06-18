@@ -1,0 +1,11 @@
+.like{
+    grid-area: like;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: center url(../../images/like.svg) no-repeat;
+    border: none;
+}
+.like:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
