@@ -7,7 +7,11 @@ const popOpened = profile.querySelector('.profile__edit')
 const popClose = popUp.querySelector('.pop-up__close')
   
 const popUpToggle = function (ev) {
-    popUp.classList.toggle('pop-up__opened')
+  if (popup.classList.contains('pop-up__opened')) {
+		  popName.value = nameInput.textContent;
+		 	popJob.value = jobInput.textContent;
+ 		}
+  popUp.classList.toggle('pop-up__opened')
 }
 
 // Обработчик «отправки» формы, хотя пока
