@@ -1,5 +1,7 @@
 @import url(./__info/card__info.css);
 @import url(./__item/card__item.css);
+@import url(./__like/card__like.css);
+@import url(./__title/card__title.css);
 .card{
     max-width: 282px;
     background-color: white;

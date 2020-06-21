@@ -1,32 +1,41 @@
-const proFile = document.querySelector('.profile')
+
+// Находим форму в DOM
+const profile = document.querySelector('.profile')
 const popUp = document.querySelector('.pop-up')
-const editButton = proFile.querySelector('.edit')
-const closePop = popUp.querySelector('.pop-up__close')
-const popSave = popUp.querySelector('.pop-up__save')
-
-const togglePop = function() {
-  popUp.classList.toggle('pop-up-open');
+const formElement = popUp.querySelector('.pop-up__form')
+const popOpened = profile.querySelector('.profile__edit')
+const popClose = popUp.querySelector('.pop-up__close')
+  
+const popUpToggle = function (ev) {
+    popUp.classList.toggle('pop-up__opened')
 }
 
-const saveButt = function(ev) {
-  ev.preventDefault()
-  let popName = popUp.querySelector('.pop-up__input_title').value
-  let popJob = popUp.querySelector('.pop-up__input_subtitle').value
-  let avaName = proFile.querySelector('.profile__title')
-  let avaJob = proFile.querySelector('.profile__subtitle')
-  avaJob.textContent = popJob;
-  avaName.textContent = popName;
-  togglePop();
-}
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+function formSubmitHandler (evt) {
+    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+                        // Так мы можем определить свою логику отправки.
+                        // О том, как это делать, расскажем позже.
 
+    // Находим поля формы в DOM
+    let nameInput = profile.querySelector('.profile__title')
+    let jobInput = profile.querySelector('.profile__subtitle')
+    let popName = popUp.querySelector('.pop-up__input_title')
+    let popJob = popUp.querySelector('.pop-up__input_subtitle')
+    popJob.textContent = popJob;
+    popName.textContent = popName;
+      }
+      
 const closeOverlay = function(ev) {
-  if (ev.target !== ev.currentTarget) {
-    return
-  }
-  togglePop();
-}
-
-editButton.addEventListener("click", togglePop);
-closePop.addEventListener("click", togglePop);
-popSave.addEventListener("click", saveButt);
-popUp.addEventListener('click', closeOverlay);
+     if (ev.target !== ev.currentTarget) {
+       return
+     }
+        popUpToggle()
+      }
+      
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+formElement.addEventListener('submit', formSubmitHandler)
+popOpened.addEventListener('click', popUpToggle)
+popClose.addEventListener('click', popUpToggle)
+popUp.addEventListener('click', closeOverlay)

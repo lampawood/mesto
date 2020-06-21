@@ -1,4 +1,4 @@
-.title{
+.card__title{
     grid-area: title;
     margin: 0;
     padding: 25px 21px 31px;

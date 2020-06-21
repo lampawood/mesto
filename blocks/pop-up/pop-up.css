@@ -1,3 +1,4 @@
+@import url(./__opened/pop-up__opened.css);
 @import url(./__form/pop-up__form.css);
 @import url(./__input/pop-up__input.css);
 @import url(./__save/pop-up__save.css);
@@ -22,6 +23,4 @@
     }
   }
   
-  .pop-up-open {
-    display: flex;
-  }
+  

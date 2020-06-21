@@ -1,4 +1,4 @@
-.add{
+.profile__add{
     grid-area: Add;
     background-color: black;
     border: 2px solid #FFFFFF;
@@ -10,14 +10,14 @@
     position: relative;
     top: 28%;
     left: 56%;
-    background: url("../../images/Add.svg") no-repeat center;
+    background: url("../../../images/Add.svg") no-repeat center;
 }
-.add:hover{
+.profile__add:hover{
     opacity: 0.8;
     cursor: pointer;
 }
 @media (max-width:881px){
-    .add{
+    .profile__add{
         width: 282px;
         left: 0;
     }

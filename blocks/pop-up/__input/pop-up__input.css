@@ -1,5 +1,5 @@
-@import url(./_title/pop-up__input_title.css);
-@import url(./_subtitle/pop-up__input_subtitle.css);
+@import url(./__title/pop-up__input__title.css);
+@import url(./__subtitle/pop-up__input__subtitle.css);
 .pop-up__input {
     font-weight: 500;
     font-size: 14px;
