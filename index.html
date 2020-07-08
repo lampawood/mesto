@@ -20,72 +20,57 @@
             <section class="profile">
                 <img class="profile__avatar" src="./images/image.jpg" alt="Портрет Пользователя">
                 <div class="profile__info">
-                    
+
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
                     <p class="profile__subtitle">Исследователь океана</p>
                 </div>
-                    <button class="profile__add">
+                <button class="profile__add">
                     </button>
-                    <button class="profile__edit">
+                <button class="profile__edit">
                     </button>
-                    </section>
-                    
-            <section class="elements">
-                <div class="card">
-                    <img class="card__item" src="./images/kirill-pershin-1088404-unsplash.png" alt="Разрушенный храм">
-                <div class="card__info">
-                    <h2 class="card__title">Карачаевск</h2>
-                    <button class="card__like"></button>
-                </div>
-                </div>
-                <div class="card">
-                    <img class="card__item" src="./images/kirill-pershin-1404681-unsplash.png" alt="Вид на Эльбрус с урочища Шатджатмаз">
-                    <div class="card__info">
-                    <h2 class="card__title">Гора Эльбрус</h2>
-                    <button class="card__like"></button>
-                </div>
-                </div>
-                <div class="card">
-                    <img class="card__item" src="./images/kirill-pershin-1556355-unsplash.png" alt="Вид на гору">
-                    <div class="card__info">
-                    <h2 class="card__title">Домбай</h2>
-                    <button class="card__like"></button>
-                </div>
-                </div>
-                <div class="card">
-                    <img class="card__item" src="./images/kirill-pershin-1404681-unsplash.png" alt="Вид на Эльбрус с урочища Шатджатмаз">
-                    <div class="card__info">
-                    <h2 class="card__title">Гора Эльбрус</h2>
-                    <button class="card__like"></button>
-                </div>
-                </div>
-                <div class="card">
-                    <img class="card__item" src="./images/kirill-pershin-1556355-unsplash.png" alt="Вид на гору">
-                    <div class="card__info">
-                    <h2 class="card__title">Домбай</h2>
-                    <button class="card__like"></button>
-                </div>
-                </div>
-                <div class="card">
-                    <img class="card__item" src="./images/kirill-pershin-1088404-unsplash.png" alt="Разрушенный храм">
-                    <div class="card__info">
-                    <h2 class="card__title">Карачаево-Черкесск</h2>
-                    <button class="card__like"></button>
-                </div>
-                </div>
             </section>
-            <section class="pop-up">
-                <form class="pop-up__form">
-                    <button class="pop-up__close" type="button"></button>
+            <section class="elements">
+                <template id="card">
+                <div class="card">
+                  <button class="card__delete"></button>
+                  <img src="#" alt="#" class="card__item" />
+                  <div class="card__info">
+                    <h2 class="card__title"></h2>
+                    <button type="button" class="card__like"></button>
+                  </div>
+              </template>
+            </section>
+            </section>
+            <section class="pop-up pop-up_type_user">
+                <form class="pop-up__form pop-up_type_user_form">
+                    <button class="pop-up__close pop-up__close_user" type="button"></button>
                     <h2 class="pop-up__title">Редактировать профиль</h2>
-                    <input type="text" class="pop-up__input pop-up__input_type_title" value="Жак-Ив Кусто">
-                    <input type="text" class="pop-up__input pop-up__input_type_subtitle" value="Исследователь океана">
-                    <button class="pop-up__save" type="submit">Сохранить</button>
+                    <input type="text" class="pop-up__input pop-up__input_type_title pop-up__input_type_name" placeholder="Имя">
+                    <input type="text" class="pop-up__input pop-up__input_type_subtitle pop-up__input_type_about" placeholder="О себе">
+                    <button class="pop-up__save pop-up__save_user pop-up__button" type="submit">Сохранить</button>
                 </form>
             </section>
+
+            <section class="pop-up pop-up_type_card">
+                <form class="pop-up__form pop-up_type_card_form">
+                    <button class="pop-up__close pop-up__close_card" type="button"></button>
+                    <h2 class="pop-up__title">Новое место</h2>
+                    <input type="text" name="name" class="pop-up__input pop-up__input_type_title pop-up__card_title" placeholder="Название">
+                    <input type="text" name="link" class="pop-up__input pop-up__input_type_subtitle pop-up__card_link" placeholder="Ссылка на картинку">
+                    <button class="pop-up__save pop-up__type_add pop-up__button" type="submit ">Создать</button>
+                </form>
+            </section>
+            <section id="pop-up-full-image" class="pop-up-full-image pop-up">
+                <div class="pop-up-full-image__container">
+                    <img src="#" alt="#" class="pop-up-full-image__image">
+                    <h3 class="pop-up-full-image__title"></h3>
+                    <button type="button" class="pop-up-full-image__close pop-up__close"></button>
+                </div>
+            </section>
+
         </main>
         <footer class="footer">
-            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+            <p class="footer__copyright ">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
     <script src="./script/index.js"></script>

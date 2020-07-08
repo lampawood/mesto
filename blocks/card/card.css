@@ -1,13 +1,15 @@
 @import url(./__info/card__info.css);
 @import url(./__item/card__item.css);
 @import url(./__like/card__like.css);
+@import url(./__like/_liked/card__like_liked.css);
 @import url(./__title/card__title.css);
-.card{
+@import url(./__delete/card__delete.css);
+.card {
     max-width: 282px;
     background-color: white;
-border-radius: 3%;
-display: grid;
-grid-template-columns: 1fr;
-grid-template-rows: 282px 80px;
-grid-template-areas: "photo" "info";
+    border-radius: 3%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 282px 80px;
+    grid-template-areas: "photo" "info";
 }

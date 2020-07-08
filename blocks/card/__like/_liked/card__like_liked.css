@@ -1,0 +1,4 @@
+.card__like_liked {
+    background: center url('../../../../images/like_liked.svg') no-repeat;
+    border: none;
+}
