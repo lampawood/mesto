@@ -1,0 +1,25 @@
+.pop-up-full-image__close {
+    top: 68px;
+    right: 273px;
+}
+
+@media(max-width:1280px) {
+    .pop-up-full-image__close {
+        top: 27px;
+        right: 241px;
+    }
+}
+
+@media (max-width: 900px) {
+    .pop-up-full-image__close {
+        top: 100px;
+        right: 20px;
+    }
+}
+
+@media (max-width:450px) {
+    .pop-up-full-image__close {
+        top: 140px;
+        right: -4px;
+    }
+}
