@@ -32,9 +32,43 @@ const popupAddSrc = document.querySelector('.pop-up__card_link');
 // закрыть btn
 const popupAddBtnExit = document.querySelector('.pop-up__close_card');
 
+// закрытие попапы по нажатию на overlay
+const closeByOverlay = (evt) => {
+    if (evt.target === evt.currentTarget) {
+        const openedPopup = (document.querySelector('.pop-up__opened'))
+        togglePopup(openedPopup);
+    }
+}
+
+// закрытие попапы по нажатию на esc
+const closeByEscape = (evt) => {
+    if (evt.key === 'Escape') {
+        const openedPopup = (document.querySelector('.pop-up__opened'))
+        togglePopup(openedPopup);
+        document.removeEventListener('keydown', closeByEscape);
+    }
+}
+
 // function toggle every popups
 const togglePopup = (popup) => {
-    popup.classList.toggle(`pop-up__opened`);
+    popup.classList.toggle('pop-up__opened');
+    // проверка для работы с кнопкй submit
+    if (popup.classList.contains('pop-up__opened')) {
+        document.addEventListener('keydown', closeByEscape);
+        popup.addEventListener('click', closeByOverlay)
+    } else {
+        document.removeEventListener('keydown', closeByEscape);
+        popup.removeEventListener('click', closeByOverlay);
+        popupFormClear({
+            popup: popup,
+            formSelector: '.pop-up__form',
+            inputSelector: '.pop-up__input',
+            submitButtonSelector: '.pop-up__save',
+            inactiveButtonClass: '.pop-up__save_disabled',
+            inputErrorClass: '.pop-up__input_type_error',
+            errorClass: '.form-input-error_active'
+        })
+    }
 }
 
 // fuction изменение профиля
@@ -50,13 +84,6 @@ const saveChangesPopupEdit = (evt) => {
     captionProfile.textContent = popupEditCaption.value;
     togglePopup(popupEdit);
     editProfile();
-}
-
-// закрытие попапы по нажатию на overlay
-const closePopup = (evt, popup) => {
-    if (evt.target === popup) {
-        togglePopup(popup);
-    }
 }
 
 // функция добавления карточек в конец
@@ -78,13 +105,6 @@ const createCard = (element) => {
     return elementCard;
 }
 
-// функция добавления начальных 6 карточек на страницу
-const createStartersCard = () => {
-    initialCards.forEach((initialCard) => {
-        addCardtoEnd(createCard(initialCard));
-    })
-}
-
 // сохранение новой карточки
 const saveNewCard = (evt) => {
     evt.preventDefault();
@@ -101,13 +121,13 @@ const likeToggle = (element) => {
     element.classList.toggle('card__like_liked')
 }
 
-//функция удаления карточке работа с кнопкой удаления
+//функция удаления карточки
 const trashButton = (element) => {
     const listItem = element.closest('.card');
     listItem.remove();
 }
 
-// функция открытия на весь экран картинки полноразмерной
+// открытие попапа full-image
 const openPopupFull = (element) => {
     const parentElement = element.closest('.card');
     const elementTitle = parentElement.querySelector('.card__title');
@@ -117,13 +137,15 @@ const openPopupFull = (element) => {
     togglePopup(popupFull);
 }
 
-// вызовы
-createStartersCard();
+// функции добавления начальных 6 карточек на страницу
+initialCards.forEach((initialCard) => {
+    addCardtoEnd(createCard(initialCard));
+})
 
-/// добавление слушателей
-// popup изменение профиля
+// обработчики для попапа изменения профиля
 buttonEdit.addEventListener('click', () => {
     togglePopup(popupEdit);
+    buttonEdit.blur();
     editProfile();
 });
 popupEditBtnExit.addEventListener('click', () => {
@@ -131,17 +153,10 @@ popupEditBtnExit.addEventListener('click', () => {
 });
 popupEditForm.addEventListener('submit', saveChangesPopupEdit);
 
-popupEdit.addEventListener('click', (evt) => {
-    closePopup(evt, popupEdit);
-});
-
-window.addEventListener('keydown', (evt) => {
-    closePopup(evt, popupEdit);
-});
-// слушатель кнопка добавления карточки
-// слушатели для попап добавления новой карточки
+// обработчики для добавление новых карточек
 creatNewCardBtn.addEventListener('click', () => {
     togglePopup(popupAdd);
+    creatNewCardBtn.blur();
 });
 popupAddBtnExit.addEventListener('click', () => {
     togglePopup(popupAdd);
@@ -150,25 +165,13 @@ popupAddForm.addEventListener('submit', (evt) => {
     saveNewCard(evt);
     togglePopup(popupAdd);
 });
-popupAdd.addEventListener('click', (evt) => {
-    closePopup(evt, popupAdd);
-});
-window.addEventListener('keydown', (evt) => {
-    closePopup(evt, popupAdd);
-});
 
-// слушатель для попапа full
+// обработчики для попапа открытия картинок на весь экран
 popupFullBtnExit.addEventListener('click', () => {
     togglePopup(popupFull);
 });
-popupFull.addEventListener('click', (evt) => {
-    closePopup(evt, popupFull);
-});
-window.addEventListener('keydown', (evt) => {
-    closePopup(evt, popupFull)
-});
 
-// слушатель галлереи для работы с кнопками (like, trash) и открытия картинки на весь экран
+// обработчики галлери для работы с кнопками (like, trash) и открытие popupFull 
 gallery.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('card__like')) {
         likeToggle(evt.target);
@@ -176,5 +179,6 @@ gallery.addEventListener('click', (evt) => {
         trashButton(evt.target)
     } else if (evt.target.classList.contains('card__item')) {
         openPopupFull(evt.target);
+        togglePopup(popupFull);
     }
 })
