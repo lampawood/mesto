@@ -1,15 +1,9 @@
 @import url(./_active/form-input-error_active.css);
 .form-input-error {
-    margin: 0;
-    padding: 0;
-    color: #FF0000;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 1.25;
+   
     opacity: 0;
     visibility: hidden;
-    margin-bottom: 17px;
-    min-height: 15px;
+   
 }
 
 .form-input-error:last-of-type {

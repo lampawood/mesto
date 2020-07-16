@@ -6,8 +6,10 @@
 @import url(../blocks/logo/logo.css);
 @import url(../blocks/content/content.css);
 @import url(../blocks/profile/profile.css);
-@import url(../blocks/form-input-error/form-input-error.css);
 @import url(../blocks/pop-up/pop-up.css);
+@import url(../blocks/pop-up/__input/_type/_error/pop-up__input_type_error.css);
+@import url(../blocks/form-input-error/form-input-error.css);
+@import url(../blocks/form-input-error/_active/form-input-error_active.css);
 @import url(../blocks/pop-up-full-image/pop-up-full-image.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/card/card.css);

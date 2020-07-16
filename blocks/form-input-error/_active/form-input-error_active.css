@@ -1,4 +1,31 @@
 .form-input-error_active {
     opacity: 1;
     visibility: visible;
+    margin: 0;
+    padding: 0;
+    color: #FF0000;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.25;
+    margin-bottom: 17px;
+    min-height: 15px;
+}
+.form-input-error_active:last-of-type {
+    margin-bottom: 30px;
+}
+@media screen and (max-width: 520px) {
+    .form-input-error_active {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .form-input-error_active {
+        margin-bottom: 2px;
+        font-size: 7px;
+        line-height: 1.2;
+    }
+    .form-input-error_active:last-of-type {
+        margin-bottom: 14px;
+    }
 }

@@ -3,14 +3,14 @@ const showInputError = (formElement, inputElement, errorMessage, inputErrorClass
     const popupErrorElement = formElement.querySelector(`#${inputElement.id}_error`);
     inputElement.classList.add(inputErrorClass);
     popupErrorElement.textContent = errorMessage;
-    popupErrorElement.classList.add('.form-input-error_active')
+    popupErrorElement.classList.add('form-input-error_active')
 }
 
 // скрываем span  с ошибкой
 const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) => {
     const popupErrorElement = formElement.querySelector(`#${inputElement.id}_error`);
     inputElement.classList.remove(inputErrorClass);
-    popupErrorElement.classList.remove('.form-input-error_active');
+    popupErrorElement.classList.remove('form-input-error_active');
     popupErrorElement.textContent = '';
 }
 
@@ -115,7 +115,7 @@ enableValidation({
     formSelector: '.pop-up__form',
     inputSelector: '.pop-up__input',
     submitButtonSelector: '.pop-up__save',
-    inactiveButtonClass: '.pop-up__save_disabled',
-    inputErrorClass: '.pop-up__input_type_error',
-    errorClass: '.form-input-error_active'
+    inactiveButtonClass: 'pop-up__save_disabled',
+    inputErrorClass: 'pop-up__input_type_error',
+    errorClass: 'form-input-error_active'
 })

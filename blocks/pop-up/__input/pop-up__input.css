@@ -1,4 +1,5 @@
 @import url(./_type/pop-up__input_type.css);
+
 .pop-up__input {
     font-weight: 500;
     font-size: 14px;
@@ -10,8 +11,4 @@
     border-bottom: 1px solid rgba(0, 0, 0, .2);
     outline: none;
     box-sizing: border-box;
-}
-
-.pop-up__input:invalid {
-    border-bottom: red;
-}
+  }

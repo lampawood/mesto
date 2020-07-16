@@ -64,9 +64,9 @@ const togglePopup = (popup) => {
             formSelector: '.pop-up__form',
             inputSelector: '.pop-up__input',
             submitButtonSelector: '.pop-up__save',
-            inactiveButtonClass: '.pop-up__save_disabled',
-            inputErrorClass: '.pop-up__input_type_error',
-            errorClass: '.form-input-error_active'
+            inactiveButtonClass: 'pop-up__save_disabled',
+            inputErrorClass: 'pop-up__input_type_error',
+            errorClass: 'form-input-error_active'
         })
     }
 }
@@ -179,6 +179,5 @@ gallery.addEventListener('click', (evt) => {
         trashButton(evt.target)
     } else if (evt.target.classList.contains('card__item')) {
         openPopupFull(evt.target);
-        togglePopup(popupFull);
     }
 })
