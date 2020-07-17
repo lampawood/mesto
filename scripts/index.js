@@ -32,6 +32,7 @@ const popupAddSrc = document.querySelector('.pop-up__card_link');
 // закрыть btn
 const popupAddBtnExit = document.querySelector('.pop-up__close_card');
 
+
 // закрытие попапы по нажатию на overlay
 const closeByOverlay = (evt) => {
     if (evt.target === evt.currentTarget) {
@@ -55,7 +56,8 @@ const togglePopup = (popup) => {
     // проверка для работы с кнопкй submit
     if (popup.classList.contains('pop-up__opened')) {
         document.addEventListener('keydown', closeByEscape);
-        popup.addEventListener('click', closeByOverlay)
+        popup.addEventListener('click', closeByOverlay);
+        console.log('kry')
     } else {
         document.removeEventListener('keydown', closeByEscape);
         popup.removeEventListener('click', closeByOverlay);
@@ -68,6 +70,7 @@ const togglePopup = (popup) => {
             inputErrorClass: 'pop-up__input_type_error',
             errorClass: 'form-input-error_active'
         })
+        console.log('fuck')
     }
 }
 
@@ -147,6 +150,14 @@ buttonEdit.addEventListener('click', () => {
     togglePopup(popupEdit);
     buttonEdit.blur();
     editProfile();
+    enableValidation({
+        formSelector: '.pop-up__form',
+        inputSelector: '.pop-up__input',
+        submitButtonSelector: '.pop-up__save',
+        inactiveButtonClass: 'pop-up__save_disabled',
+        inputErrorClass: 'pop-up__input_type_error',
+        errorClass: 'form-input-error_active'
+    })
 });
 popupEditBtnExit.addEventListener('click', () => {
     togglePopup(popupEdit);
