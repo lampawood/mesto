@@ -57,7 +57,6 @@ const togglePopup = (popup) => {
     if (popup.classList.contains('pop-up__opened')) {
         document.addEventListener('keydown', closeByEscape);
         popup.addEventListener('click', closeByOverlay);
-        console.log('kry')
     } else {
         document.removeEventListener('keydown', closeByEscape);
         popup.removeEventListener('click', closeByOverlay);
@@ -70,7 +69,6 @@ const togglePopup = (popup) => {
             inputErrorClass: 'pop-up__input_type_error',
             errorClass: 'form-input-error_active'
         })
-        console.log('fuck')
     }
 }
 
