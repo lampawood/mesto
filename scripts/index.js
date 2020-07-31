@@ -26,7 +26,6 @@ export const windowReset = (popupWindow, avaNameValue, avaJobValue) => {
     avaJob.textContent = avaJobValue
     inputJob.value = avaJobValue
     inputName.value = avaNameValue
-
   } else {
     if ((popupWindow.id === 'add-card') || (popupWindow.id === 'user'))
       popupWindow.querySelector('.pop-up__form').reset();
