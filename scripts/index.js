@@ -1,14 +1,14 @@
 import {initialCards} from './cards.js';
 import {popUpProfile, proFile, avaName, avaJob, inputName, inputJob} from './Card.js';
-import {Card} from './card.js'
-import {Validate} from './validate.js'
+import {Card} from './Card.js'
+import {FormValidator} from './validate.js'
 
-const popUp = document.querySelectorAll('.popup')
-const popUpAddcard = document.querySelector('#add-card')
+const popUp = document.querySelectorAll('.pop-up')
+const popUpAddcard = document.querySelector('.pop-up_type_card')
 const editButton = proFile.querySelector('.profile__edit')
 const closePop = document.querySelectorAll('.pop-up__close')
-const addButton = proFile.querySelector('.profile__button')
-const popUpAddForm = popUpAddcard.querySelector('.profile__add')
+const addButton = proFile.querySelector('.profile__add')
+const popUpAddForm = popUpAddcard.querySelector('.pop-up__form')
 const buttonSave = popUpAddcard.querySelector('.pop-up__save')
 const inputPlace = popUpAddcard.querySelector('.pop-up__card_title')
 const inputPic = popUpAddcard.querySelector('.pop-up__card_link')
@@ -17,7 +17,7 @@ let jobValue
 
 export const windowReset = (popupWindow, avaNameValue, avaJobValue) => {
   const popUpProfile = document.querySelector('#user')
-  const form = popupWindow.querySelector('.pop-up_type_user_form')
+  const form = popupWindow.querySelector('.pop-up__form')
   const input = Array.from(popupWindow.querySelectorAll('.pop-up__input'))
   const button = popUpProfile.querySelector('.pop-up__save')
 
@@ -26,6 +26,7 @@ export const windowReset = (popupWindow, avaNameValue, avaJobValue) => {
     avaJob.textContent = avaJobValue
     inputJob.value = avaJobValue
     inputName.value = avaNameValue
+
   } else {
     if ((popupWindow.id === 'add-card') || (popupWindow.id === 'user'))
       popupWindow.querySelector('.pop-up__form').reset();
@@ -77,7 +78,7 @@ const addPlaceHandler = (event) => {
     link: inputPic.value
   }
 
-  const newCard = new Card(cardContext, '.card').generateCard();
+  const newCard = new Card(cardContext, '.template__card')._generateCard();
   addCard(newCard);
   popUpAddForm.reset();
   buttonSave.classList.add('pop-up__save_disabled')
@@ -118,9 +119,9 @@ popUpAddcard.addEventListener('submit', addPlaceHandler);
 
 const renderCard = (array) => {
   array.forEach(element => {
-    const newCard = new Card(element, '.card');
-    addCard(newCard.generateCard());
-  })
+    const newCard = new Card(element, '.template__card');
+    addCard(newCard._generateCard());
+  });
 }
 renderCard(initialCards);
 

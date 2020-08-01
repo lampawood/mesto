@@ -1,7 +1,6 @@
 .form-input-error_active {
     opacity: 1;
     visibility: visible;
-    margin: 0;
     padding: 0;
     color: #FF0000;
     font-weight: 400;
