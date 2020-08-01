@@ -1,5 +1,5 @@
 import {initialCards} from './cards.js';
-import {popUpProfile, proFile, avaName, avaJob, inputName, inputJob} from './Card.js';
+import {popUpProfile, proFile, avaName, avaJob, inputName, inputJob} from './card.js';
 import {Card} from './card.js'
 import {FormValidator} from './validate.js'
 
