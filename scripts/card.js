@@ -8,7 +8,7 @@ export const inputName = popUpProfile.querySelector('.pop-up__input_type_name')
 export const inputJob = popUpProfile.querySelector('.pop-up__input_type_about')
 
 
-export  class Card {
+export class Card {
     constructor(data, cardTemplate) {
             this._name = data.name,
             this._link = data.link,
