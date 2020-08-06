@@ -1,116 +1,131 @@
-import {initialCards} from './cards.js';
-import {popUpProfile, proFile, avaName, avaJob, inputName, inputJob} from './card.js';
-import {Card} from './card.js'
-import {FormValidator} from './validate.js'
+import {InitialCards} from './Сards.js';
+import {Card} from './Card.js'
+import FormValidator from './FormValidator.js'
+import { validationObj } from './FormValidator.js'
 
+
+const popUpProfile = document.querySelector('#user')
+const inputName = popUpProfile.querySelector('.pop-up__input_type_name')
+const inputJob = popUpProfile.querySelector('.pop-up__input_type_about')
 const popUp = document.querySelectorAll('.pop-up')
-const popUpAddcard = document.querySelector('.pop-up_type_card')
-const editButton = proFile.querySelector('.profile__edit')
+const popUpAddcard = document.querySelector('#add-card')
 const closePop = document.querySelectorAll('.pop-up__close')
-const addButton = proFile.querySelector('.profile__add')
 const popUpAddForm = popUpAddcard.querySelector('.pop-up__form')
 const buttonSave = popUpAddcard.querySelector('.pop-up__save')
 const inputPlace = popUpAddcard.querySelector('.pop-up__card_title')
-const inputPic = popUpAddcard.querySelector('.pop-up__card_link')
+const inputPic = popUpAddcard.querySelector('.popup__card_link')
+const proFile = document.querySelector('.profile')
+const addButton = proFile.querySelector('.profile__add')
+const editButton = proFile.querySelector('.profile__edit')
+const avaName = proFile.querySelector('.profile__title')
+const avaJob = proFile.querySelector('.profile__subtitle')
+const cardForm = '#add-card'
+const profileForm = '#user'
+const cardValidator = new FormValidator(validationObj, cardForm)
+const profileValidator = new FormValidator(validationObj, profileForm)
 let nameValue
 let jobValue
 
-export const windowReset = (popupWindow, avaNameValue, avaJobValue) => {
-  const popUpProfile = document.querySelector('#user')
-  const form = popupWindow.querySelector('.pop-up__form')
-  const input = Array.from(popupWindow.querySelectorAll('.pop-up__input'))
-  const button = popUpProfile.querySelector('.pop-up__save')
+const windowReset = (popupWindow, avaNameValue, avaJobValue) => {
+    const forms = popupWindow.querySelector('.pop-up__form')
+    const input = Array.from(popupWindow.querySelectorAll('.pop-up__input'))
+    const button = popUpProfile.querySelector('.pop-up__save')
 
-  if (avaNameValue) {
-    avaName.textContent = avaNameValue
-    avaJob.textContent = avaJobValue
-    inputJob.value = avaJobValue
-    inputName.value = avaNameValue
+    if (avaNameValue) {
+        avaName.textContent = avaNameValue.value
+        avaJob.textContent = avaJobValue.value
 
-  } else {
-    if ((popupWindow.id === 'add-card') || (popupWindow.id === 'user'))
-      popupWindow.querySelector('.pop-up__form').reset();
-  }
+    } else {
+        if (popupWindow.id === 'profile' || popupWindow.id === 'add-card')
+            forms.reset();
+    }
+    formReset(forms, input, button);
+}
 
-  input.forEach(el => {
-    FormValidator.hideInputError(form, el)
-  })
-  FormValidator.toggleButtonState(input, button)
+const formReset = (forms, input, button) => {
+    input.forEach(el => {
+        const errorElement = forms.querySelector(`#${el.id}_error`);
+        el.classList.remove('form__input-error');
+        errorElement.classList.remove('form__input-error');
+        errorElement.textContent = '';
+        el.classList.contains('form__input_error') ?
+            button.classList.add('pop-up__save_disabled') :
+            button.classList.remove('pop-up__save_disabled')
+    })
 }
 
 export const togglePopUp = (popupWindow) => {
 
-  popupWindow.classList.toggle('pop-up__opened');
-  windowReset(popupWindow, nameValue, jobValue);
+    popupWindow.classList.toggle('pop-up__opened');
+    windowReset(popupWindow, nameValue, jobValue);
 }
 
 const updateProfile = (event) => {
 
-  event.preventDefault()
-  const popName = inputName.value
-  const popJob = inputJob.value
-  avaJob.textContent = popJob
-  avaJob.setAttribute('title', popJob);
-  avaName.textContent = popName
-  avaName.setAttribute('title', popName);
-  nameValue = avaName.textContent
-  jobValue = avaJob.textContent
-  togglePopUp(popUpProfile);
+    event.preventDefault()
+    avaJob.textContent = inputJob.value
+    avaJob.setAttribute('title', inputJob.value);
+    avaName.textContent = inputName.value
+    avaName.setAttribute('title', inputName.value);
+    nameValue = avaName.textContent
+    jobValue = avaJob.textContent
+    togglePopUp(popUpProfile);
 }
 
 const addCard = (generatedCard) => {
-  const place = document.querySelector('.elements')
-  const card = generatedCard;
-  place.prepend(card);
+    const place = document.querySelector('.elements')
+    const card = generatedCard;
+    place.prepend(card);
 }
 
 const closeOverlay = (event) => {
-  if (event.target !== event.currentTarget) {
-    return
-  }
-  togglePopUp(event.target);
+    if (event.target !== event.currentTarget) {
+        return
+    }
+    togglePopUp(event.target);
 }
 
 const addPlaceHandler = (event) => {
-  event.preventDefault()
-  const cardContext = {
-    name: inputPlace.value,
-    link: inputPic.value
-  }
+    event.preventDefault()
+    const cardContext = {
+        name: inputPlace.value,
+        link: inputPic.value
+    }
 
-  const newCard = new Card(cardContext, '.template__card')._generateCard();
-  addCard(newCard);
-  popUpAddForm.reset();
-  buttonSave.classList.add('pop-up__save_disabled')
-  togglePopUp(popUpAddcard);
+    const newCard = new Card(cardContext, '.template__card').generateCard();
+    addCard(newCard);
+    popUpAddForm.reset();
+    buttonSave.classList.add('pop-up__save_disabled')
+    togglePopUp(popUpAddcard);
 }
 
 editButton.addEventListener('click', () => {
-  togglePopUp(popUpProfile);
+    togglePopUp(popUpProfile);
+
 })
 
 addButton.addEventListener('click', () => {
-  togglePopUp(popUpAddcard);
+    togglePopUp(popUpAddcard);
 })
 
 popUp.forEach(element => {
-  element.addEventListener('click', closeOverlay);
+    element.addEventListener('click', closeOverlay);
 })
 
 document.addEventListener('keydown', (event) => {
-  if (event.keyCode === 27) {
-    popUp.forEach(form => {
-      form.classList.remove('pop-up__opened')
-    })
-  }
+    if (event.key === "Escape") {
+        popUp.forEach(form => {
+            form.classList.remove('pop-up__opened')
+        })
+    }
 })
 
 closePop.forEach(element => {
-  element.addEventListener('click', (event) => {
-    const closeEvent = event.target
-    const close = closeEvent.closest('.pop-up');
-    togglePopUp(close);
-  })
+    element.addEventListener('click', (event) => {
+        const closeEvent = event.target
+        const close = closeEvent.closest('.pop-up');
+        togglePopUp(close);
+    })
 })
 
 popUpProfile.addEventListener('submit', updateProfile);
@@ -118,21 +133,16 @@ popUpProfile.addEventListener('submit', updateProfile);
 popUpAddcard.addEventListener('submit', addPlaceHandler);
 
 const renderCard = (array) => {
-  array.forEach(element => {
-    const newCard = new Card(element, '.template__card');
-    addCard(newCard._generateCard());
-  });
+    array.forEach(element => {
+        const newCard = new Card(element, '.template__card');
+        addCard(newCard.generateCard());
+    })
 }
-renderCard(initialCards);
+renderCard(InitialCards);
 
-const validationObj = {
-  inputSelector: '.pop-up__input',
-  submitButtonSelector: '.pop-up__save',
-};
-
-const validation = (validationObj) => {
-  const newValidation = new FormValidator(validationObj, '.pop-up__form')
-  newValidation.enableValidation()
+const validation = () => {
+    cardValidator.enableValidation()
+    profileValidator.enableValidation()
 }
 
-validation(validationObj);
+validation();

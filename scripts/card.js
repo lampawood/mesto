@@ -1,56 +1,45 @@
+import { togglePopUp } from './index.js'
 
-import {togglePopUp} from './index.js'
-export const popUpProfile = document.querySelector('#user')
-export const proFile = document.querySelector('.profile')
-export const avaName = proFile.querySelector('.profile__title')
-export const avaJob = proFile.querySelector('.profile__subtitle')
-export const inputName = popUpProfile.querySelector('.pop-up__input_type_name')
-export const inputJob = popUpProfile.querySelector('.pop-up__input_type_about')
+const popupBigImg = document.querySelector('#pop-up-full-image')
+const popUpBigPic = popupBigImg.querySelector('.pop-up-full-image__image')
+const popUpBigText = popupBigImg.querySelector('.pop-up-full-image__title')
 
 
 export class Card {
     constructor(data, cardTemplate) {
-            this._name = data.name,
+        this._name = data.name,
             this._link = data.link,
             this._temp = cardTemplate
     }
 
-    _getTemplate = () => {
-        const cardElement = document
-        .querySelector(this._temp)
-        .content
-        .querySelector('.card')
-        .cloneNode(true);
+    _getTemplate() {
+        const cardElement = document.querySelector(this._temp)
+            .content
+            .querySelector('.card')
+            .cloneNode(true);
 
-        this._element = cardElement;
+        return this._element = cardElement;
     }
 
-    _clickTrash = () => {
-        const trashTarget = this._element
-        const cardToRemove = trashTarget.closest('.card');
-        cardToRemove.querySelector('.card__item').removeEventListener('click', this._openPopBig)
-        cardToRemove.querySelector('.card__like').removeEventListener('click', this._clickLike)
-        cardToRemove.querySelector('.card__delete').removeEventListener('click', this._clickTrash)
-        cardToRemove.remove();
+    _clickTrash() {
+        this._element.querySelector('.card__item').removeEventListener('click', this._openPopBig)
+        this._element.querySelector('.card__like').removeEventListener('click', this._clickLike)
+        this._element.querySelector('.card__delete').removeEventListener('click', this._clickTrash)
+        this._element.remove()
+        this._element = null
     }
 
-    _openPopBig = () => {
-        const targetPic = this._element
-        const picLink = targetPic.querySelector('.card__item').src;
-        const placeCard = targetPic.closest('.card');
-        const placeTitle = placeCard.querySelector('.card__title').textContent
-        const popupBigImg = document.querySelector('#pop-up-full-image')
-        const popUpBigPic = popupBigImg.querySelector('.pop-up-full-image__image')
-        const popUpBigText = popupBigImg.querySelector('.pop-up-full-image__title')
-        popUpBigPic.setAttribute('src', picLink);
-        popUpBigPic.setAttribute('alt', placeTitle);
-        popUpBigPic.setAttribute('title', placeTitle);
+    _openPopBig() {
+        const placeTitle = this._element.querySelector('.card__title').textContent
+        popUpBigPic.src = this._link;
+        popUpBigPic.alt = this._name;
+        popUpBigPic.title = this._name;
         popUpBigText.textContent = placeTitle
         togglePopUp(popupBigImg);
     }
 
 
-    _clickLike = () => {
+    _clickLike() {
         this._element.querySelector('.card__like').classList.toggle('card__like_liked')
     }
 
@@ -69,7 +58,7 @@ export class Card {
         });
     }
 
-    _generateCard = () => {
+    generateCard() {
         this._getTemplate();
         this._setEventListeners();
         this._element.querySelector('.card__title').textContent = this._name;
