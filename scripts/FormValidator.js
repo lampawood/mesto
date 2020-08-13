@@ -13,14 +13,14 @@ export default class FormValidator {
 
     _showInputError(formElement, inputElement, errorMessage) {
         const errorElement = formElement.querySelector(`#${inputElement.id}_error`);
-        inputElement.classList.add('pop-up__input_type_error');
+        inputElement.classList.add('form-input-type_error');
         errorElement.textContent = errorMessage;
         errorElement.classList.add('form-input-error_active');
     };
 
     _hideInputError = (formElement, inputElement) => {
         const errorElement = formElement.querySelector(`#${inputElement.id}_error`);
-        inputElement.classList.remove('pop-up__input_type_error');
+        inputElement.classList.remove('form-input-type_error');
         errorElement.classList.remove('form-input-error_active');
         errorElement.textContent = '';
     };
@@ -41,13 +41,15 @@ export default class FormValidator {
 
     _toggleButtonState(inputList, buttonElement) {
 
-        if (this._hasInvalidInput(inputList)) {
+        if(this._hasInvalidInput(inputList)) {
             buttonElement.classList.add('pop-up__save_disabled');
-            buttonElement.disabled=true;
-            console.log('kya')
-        } else buttonElement.classList.remove('pop-up__save_disabled');
-        buttonElement.disabled=false;
-        console.log('fuy')
+            buttonElement.disabled = true;
+        }
+         else
+        {
+            buttonElement.classList.remove('pop-up__save_disabled');
+            buttonElement.disabled = false;
+        }
     }
 
     _checkEnter(inputList) {

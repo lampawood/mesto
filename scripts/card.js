@@ -9,6 +9,7 @@ export class Card {
     constructor(data, cardTemplate) {
         this._name = data.name,
             this._link = data.link,
+            this._like
             this._temp = cardTemplate
     }
 

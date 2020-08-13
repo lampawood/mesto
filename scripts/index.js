@@ -1,5 +1,5 @@
-import {InitialCards} from './Сards.js';
-import {Card} from './Card.js'
+import { InitialCards } from './Сards.js';
+import { Card } from './Card.js'
 import FormValidator from './FormValidator.js'
 import { validationObj } from './FormValidator.js'
 
@@ -8,67 +8,76 @@ const popUpProfile = document.querySelector('#user')
 const inputName = popUpProfile.querySelector('.pop-up__input_type_name')
 const inputJob = popUpProfile.querySelector('.pop-up__input_type_about')
 const popUp = document.querySelectorAll('.pop-up')
-const popUpAddcard = document.querySelector('#add-card')
+const popUpen = document.querySelector('.pop-up')
+const popUpAddCard = document.querySelector('#add-card')
 const closePop = document.querySelectorAll('.pop-up__close')
-const popUpAddForm = popUpAddcard.querySelector('.pop-up__form')
-const buttonSave = popUpAddcard.querySelector('.pop-up__save')
-const inputPlace = popUpAddcard.querySelector('.pop-up__card_title')
-const inputPic = popUpAddcard.querySelector('.popup__card_link')
+const popUpAddForm = popUpAddCard.querySelector('.pop-up__form')
+const popUpProfileForm = popUpProfile.querySelector('.pop-up__form')
+const popUpInput = popUpen.querySelector('.pop-up__input')
+const buttonSave = popUpAddCard.querySelector('.pop-up__save')
+const inputPlace = popUpAddCard.querySelector('.pop-up__card_title')
+const inputPic = popUpAddCard.querySelector('.pop-up__card_link')
 const proFile = document.querySelector('.profile')
 const addButton = proFile.querySelector('.profile__add')
 const editButton = proFile.querySelector('.profile__edit')
 const avaName = proFile.querySelector('.profile__title')
 const avaJob = proFile.querySelector('.profile__subtitle')
+const formCardSpan = popUpen.querySelector('.form-input-error')
 const cardForm = '#add-card'
 const profileForm = '#user'
 const cardValidator = new FormValidator(validationObj, cardForm)
 const profileValidator = new FormValidator(validationObj, profileForm)
-let nameValue
-let jobValue
 
-const windowReset = (popupWindow, avaNameValue, avaJobValue) => {
-    const forms = popupWindow.querySelector('.pop-up__form')
-    const input = Array.from(popupWindow.querySelectorAll('.pop-up__input'))
-    const button = popUpProfile.querySelector('.pop-up__save')
 
-    if (avaNameValue) {
-        avaName.textContent = avaNameValue.value
-        avaJob.textContent = avaJobValue.value
+const windowReset = () => {
+    const formReset = (form) => {
+        form.reset();
+    };
+    formReset(popUpProfileForm)
+        inputName.value = avaName.textContent
+        inputJob.value = avaJob.textContent
+    popUpInput.classList.remove('form-input-type_error')
+    formCardSpan.classList.remove('form-input-type_error')
 
-    } else {
-        if (popupWindow.id === 'profile' || popupWindow.id === 'add-card')
-            forms.reset();
-    }
-    formReset(forms, input, button);
-}
+        if(popUpAddForm) {
+            formReset(popUpAddForm)
+            inputPic.classList.remove('form-input-type_error')
+            inputPlace.classList.remove('form-input-type_error')
+            formCardSpan.classList.remove('.form-input-error_active')
+        }
 
-const formReset = (forms, input, button) => {
-    input.forEach(el => {
-        const errorElement = forms.querySelector(`#${el.id}_error`);
-        el.classList.remove('form__input-error');
-        errorElement.classList.remove('form__input-error');
-        errorElement.textContent = '';
-        el.classList.contains('form__input_error') ?
-            button.classList.add('pop-up__save_disabled') :
-            button.classList.remove('pop-up__save_disabled')
-    })
+
 }
 
 export const togglePopUp = (popupWindow) => {
 
     popupWindow.classList.toggle('pop-up__opened');
-    windowReset(popupWindow, nameValue, jobValue);
-}
+    windowReset(popUp, avaName, avaJob, inputName, inputJob, inputPlace, inputPic,/* formCard*/);
 
+    if(popupWindow.classList.contains('pop-up__opened')){
+        document.addEventListener('keydown', closeByEscape)
+    }
+
+
+}
+const closeByEscape = (event) =>{
+
+
+        if (event.key === "Escape") {
+
+            popUp.forEach(form => {
+                form.classList.remove('pop-up__opened')
+                document.removeEventListener('keydown', closeByEscape)
+            })
+        }
+
+}
 const updateProfile = (event) => {
 
     event.preventDefault()
     avaJob.textContent = inputJob.value
-    avaJob.setAttribute('title', inputJob.value);
     avaName.textContent = inputName.value
-    avaName.setAttribute('title', inputName.value);
-    nameValue = avaName.textContent
-    jobValue = avaJob.textContent
+
     togglePopUp(popUpProfile);
 }
 
@@ -96,7 +105,7 @@ const addPlaceHandler = (event) => {
     addCard(newCard);
     popUpAddForm.reset();
     buttonSave.classList.add('pop-up__save_disabled')
-    togglePopUp(popUpAddcard);
+    togglePopUp(popUpAddCard);
 }
 
 editButton.addEventListener('click', () => {
@@ -105,32 +114,37 @@ editButton.addEventListener('click', () => {
 })
 
 addButton.addEventListener('click', () => {
-    togglePopUp(popUpAddcard);
+    togglePopUp(popUpAddCard);
 })
 
 popUp.forEach(element => {
     element.addEventListener('click', closeOverlay);
 })
 
-document.addEventListener('keydown', (event) => {
+/*document.addEventListener('keydown', (event) => {
     if (event.key === "Escape") {
         popUp.forEach(form => {
             form.classList.remove('pop-up__opened')
         })
     }
-})
+})*/
 
 closePop.forEach(element => {
     element.addEventListener('click', (event) => {
         const closeEvent = event.target
         const close = closeEvent.closest('.pop-up');
         togglePopUp(close);
+
     })
+
 })
 
 popUpProfile.addEventListener('submit', updateProfile);
 
-popUpAddcard.addEventListener('submit', addPlaceHandler);
+popUpAddCard.addEventListener('submit', addPlaceHandler);
+//document.addEventListener('keydown', closeByEscape)
+
+//document.removeEventListener('keydown', closeByEscape)
 
 const renderCard = (array) => {
     array.forEach(element => {
