@@ -1,5 +1,5 @@
-import { InitialCards } from './Cards';
-import { Card } from './card.js'
+import { InitialCards } from './Cards.js';
+import { Card } from './Card.js'
 import FormValidator from './FormValidator.js'
 import { validationObj } from './FormValidator.js'
 
