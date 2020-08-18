@@ -22,7 +22,7 @@ const addButton = proFile.querySelector('.profile__add')
 const editButton = proFile.querySelector('.profile__edit')
 const avaName = proFile.querySelector('.profile__title')
 const avaJob = proFile.querySelector('.profile__subtitle')
-const formCardSpan = popUpen.querySelector('.form-input-error')
+const formCardSpan = document.querySelectorAll('.form-input-error')
 const cardForm = '#add-card'
 const profileForm = '#user'
 const cardValidator = new FormValidator(validationObj, cardForm)
@@ -32,45 +32,45 @@ const profileValidator = new FormValidator(validationObj, profileForm)
 const windowReset = () => {
     const formReset = (form) => {
         form.reset();
+        validation();
     };
-    formReset(popUpProfileForm)
-        inputName.value = avaName.textContent
-        inputJob.value = avaJob.textContent
-    popUpInput.classList.remove('form-input-type_error')
-    formCardSpan.classList.remove('form-input-type_error')
-
-        if(popUpAddForm) {
-            formReset(popUpAddForm)
-            inputPic.classList.remove('form-input-type_error')
-            inputPlace.classList.remove('form-input-type_error')
-            formCardSpan.classList.remove('.form-input-error_active')
+    formCardSpan.forEach(span => {
+            span.classList.remove('form-input-error_active')
         }
+    );
+
+    formReset(popUpProfileForm)
+    inputName.value = avaName.textContent
+    inputJob.value = avaJob.textContent
+    popUpProfileForm.classList.remove('form-input-error_active')
+    popUpInput.classList.remove('form-input-type_error')
 
 
+    if (popUpAddForm) {
+        validation();
+        formReset(popUpAddForm)
+        inputPic.classList.remove('form-input-type_error')
+        inputPlace.classList.remove('form-input-type_error')
+
+    }
 }
 
 export const togglePopUp = (popupWindow) => {
 
     popupWindow.classList.toggle('pop-up__opened');
-    windowReset(popUp, avaName, avaJob, inputName, inputJob, inputPlace, inputPic,/* formCard*/);
+    windowReset(popUp, avaName, avaJob, inputName, inputJob, inputPlace, inputPic, /* formCard */);
 
     if(popupWindow.classList.contains('pop-up__opened')){
         document.addEventListener('keydown', closeByEscape)
     }
-
-
 }
 const closeByEscape = (event) =>{
-
-
-        if (event.key === "Escape") {
-
-            popUp.forEach(form => {
+    if (event.key === "Escape") {
+        popUp.forEach(form => {
                 form.classList.remove('pop-up__opened')
                 document.removeEventListener('keydown', closeByEscape)
             })
         }
-
 }
 const updateProfile = (event) => {
 
@@ -121,14 +121,6 @@ popUp.forEach(element => {
     element.addEventListener('click', closeOverlay);
 })
 
-/*document.addEventListener('keydown', (event) => {
-    if (event.key === "Escape") {
-        popUp.forEach(form => {
-            form.classList.remove('pop-up__opened')
-        })
-    }
-})*/
-
 closePop.forEach(element => {
     element.addEventListener('click', (event) => {
         const closeEvent = event.target
@@ -142,9 +134,7 @@ closePop.forEach(element => {
 popUpProfile.addEventListener('submit', updateProfile);
 
 popUpAddCard.addEventListener('submit', addPlaceHandler);
-//document.addEventListener('keydown', closeByEscape)
 
-//document.removeEventListener('keydown', closeByEscape)
 
 const renderCard = (array) => {
     array.forEach(element => {

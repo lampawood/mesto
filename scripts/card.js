@@ -7,25 +7,29 @@ const popUpBigText = popupBigImg.querySelector('.pop-up-full-image__title')
 
 export class Card {
     constructor(data, cardTemplate) {
-        this._name = data.name,
-            this._link = data.link,
-            this._like
-            this._temp = cardTemplate
+            this._name = data.name;
+            this._link = data.link;
+            this._temp = cardTemplate;
+
     }
 
     _getTemplate() {
-        const cardElement = document.querySelector(this._temp)
+        this._element = document.querySelector(this._temp)
             .content
             .querySelector('.card')
             .cloneNode(true);
 
-        return this._element = cardElement;
+        this._like = this._element.querySelector('.card__like');
+        this._item = this._element.querySelector('.card__item');
+        this._delete = this._element.querySelector('.card__delete');
+
+        return this._element ;
     }
 
     _clickTrash() {
-        this._element.querySelector('.card__item').removeEventListener('click', this._openPopBig)
-        this._element.querySelector('.card__like').removeEventListener('click', this._clickLike)
-        this._element.querySelector('.card__delete').removeEventListener('click', this._clickTrash)
+        this._item.removeEventListener('click', this._openPopBig)
+        this._like.removeEventListener('click', this._clickLike)
+        this._delete.removeEventListener('click', this._clickTrash)
         this._element.remove()
         this._element = null
     }
@@ -35,35 +39,35 @@ export class Card {
         popUpBigPic.src = this._link;
         popUpBigPic.alt = this._name;
         popUpBigPic.title = this._name;
-        popUpBigText.textContent = placeTitle
+        popUpBigText.textContent = placeTitle;
         togglePopUp(popupBigImg);
     }
 
 
     _clickLike() {
-        this._element.querySelector('.card__like').classList.toggle('card__like_liked')
+        this._like.classList.toggle('card__like_liked')
     }
 
     _setEventListeners = () => {
 
-        this._element.querySelector('.card__delete').addEventListener('click', () => {
+        this._delete.addEventListener('click', () => {
             this._clickTrash();
         });
 
-        this._element.querySelector('.card__like').addEventListener('click', () => {
+        this._like.addEventListener('click', () => {
             this._clickLike();
         });
 
-        this._element.querySelector('.card__item').addEventListener('click', () => {
+        this._item.addEventListener('click', () => {
             this._openPopBig();
         });
     }
 
     generateCard() {
-        this._getTemplate();
+        this._element = this._getTemplate();
         this._setEventListeners();
         this._element.querySelector('.card__title').textContent = this._name;
-        const placesPic = this._element.querySelector('.card__item')
+        const placesPic = this._element.querySelector('.card__item');
         placesPic.src = this._link;
         placesPic.alt = this._name;
         placesPic.title = this._name;
