@@ -1,4 +1,4 @@
-import { togglePopUp } from './index.js'
+import { openPopUp } from './Utils.js'
 
 const popupBigImg = document.querySelector('#pop-up-full-image')
 const popUpBigPic = popupBigImg.querySelector('.pop-up-full-image__image')
@@ -23,6 +23,7 @@ export class Card {
         this._item = this._element.querySelector('.card__item');
         this._delete = this._element.querySelector('.card__delete');
 
+
         return this._element ;
     }
 
@@ -35,12 +36,12 @@ export class Card {
     }
 
     _openPopBig() {
-        const placeTitle = this._element.querySelector('.card__title').textContent
+        const placeTitle = this._name;
         popUpBigPic.src = this._link;
         popUpBigPic.alt = this._name;
         popUpBigPic.title = this._name;
         popUpBigText.textContent = placeTitle;
-        togglePopUp(popupBigImg);
+        openPopUp(popupBigImg);
     }
 
 
@@ -67,7 +68,7 @@ export class Card {
         this._element = this._getTemplate();
         this._setEventListeners();
         this._element.querySelector('.card__title').textContent = this._name;
-        const placesPic = this._element.querySelector('.card__item');
+        const placesPic = this._item;
         placesPic.src = this._link;
         placesPic.alt = this._name;
         placesPic.title = this._name;

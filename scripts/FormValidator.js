@@ -52,17 +52,6 @@ export default class FormValidator {
         }
     }
 
-    _checkEnter(inputList) {
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === "Enter") {
-                if (this._hasInvalidInput(inputList)) {
-                    event.preventDefault();
-                }
-            }
-        })
-    }
-
     _setEventListeners(formElement, inputSelector, submitButtonSelector) {
 
         const inputList = Array.from(formElement.querySelectorAll(inputSelector));
@@ -73,7 +62,7 @@ export default class FormValidator {
             inputElement.addEventListener('input', () => {
                 this._checkInputValidity(formElement, inputElement);
                 this._toggleButtonState(inputList, buttonElement);
-                this._checkEnter(inputList);
+
             });
         });
     }
