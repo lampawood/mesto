@@ -76,4 +76,3 @@ popUpProfile.addEventListener('submit', (event) =>{
 });
 cardValidator.enableValidation()
 profileValidator.enableValidation()
-export {AddCard} from '../Utils/constants.js'
