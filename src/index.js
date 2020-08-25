@@ -41,6 +41,7 @@ popupAdd.setEventListeners()
 addButton.addEventListener('click', () => {
     popupAdd.open();
     cardValidator.hideErrors(popUpAddcard);
+  // cardValidator.resetButton(popUpAddcard);
 })
 
 const popupWithImage = new PopupWithImage(BigPopu, {
@@ -49,13 +50,14 @@ const popupWithImage = new PopupWithImage(BigPopu, {
 });
 const userInfo = new UserInfo (
     {
-    name :document.querySelector('.profile__title'),
-    job : document.querySelector('.profile__subtitle')
-});
+        name: document.querySelector('.profile__title'),
+        job: document.querySelector('.profile__subtitle')
+    });
 editButton.addEventListener('click', () => {
     popupEdit.open();
     userInfo.getUserInfo();
     profileValidator.hideErrors(popUpProfile, '.pop-up_type_user');
+    profileValidator.resetButton(popUpProfile)
 });
 const popupEdit = new PopupWithForm(popupInfo, () => {
         userInfo.setUserInfo();
@@ -74,6 +76,7 @@ popUpProfile.addEventListener('submit', (event) =>{
     event.preventDefault();
     userInfo.getUserInfo();
     popUpProfile.classList.remove('pop-up__opened')}
+
 });
 cardValidator.enableValidation()
 profileValidator.enableValidation()

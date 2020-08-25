@@ -32,28 +32,14 @@ export class FormValidator {
         errorElement.classList.remove(inputErrorBorder);
         errorElement.textContent = '';
     };
-    hideErrors = (forms, formId) => {
+    hideErrors = (forms) => {
         const input = Array.from(forms.querySelectorAll('.pop-up__input'))
-        const button = forms.querySelector('.pop-up__save')
         input.forEach(el => {
             const errorElement = forms.querySelector(`#${el.id}_error`);
             el.classList.remove('form-input-type_error');
             errorElement.classList.remove('form-input-error_active');
             errorElement.textContent = '';
-            input.value = '';
-            if (formId) {
-                if(el.classList.contains('form-input-type_error')) {
-                    button.classList.add('pop-up__save_disabled');
-                    button.disabled = false;
-                }
-                else
-                {
-                    button.classList.remove('pop-up__save_disabled');
-                    button.disabled = true;
-                }
-            }
-            else forms.querySelector('.pop-up__form').reset();
-        })
+            input.value = '';}                                        )
     }
 
     _checkInputValidity = (formElement, inputElement) => {
@@ -72,12 +58,32 @@ export class FormValidator {
 
     _toggleButtonState(inputList, buttonElement, buttonDisabled) {
 
-        if (this._hasInvalidInput(inputList)) {
-            buttonElement.classList.add(buttonDisabled)
-        } else {buttonElement.classList.remove(buttonDisabled)}
+       if (this._hasInvalidInput(inputList)) {
+           // buttonElement.classList.add(buttonDisabled)
+            buttonElement.disabled = true;
+            console.log('first')
+        } else {
+           console.log('second')
+           buttonElement.classList.remove(buttonDisabled)
+        buttonElement.disabled = false;
+       }
     }
-
-    _checkEnter(inputList) {
+     resetButton = () => {
+        const  form = document.querySelector(this._formSelector);
+        const button = form.querySelector(this._submitButtonSelector);
+        const buttonDisabled = this._buttonDisabled;
+        console.log('third')
+        console.log(this._buttonDisabled)
+        /* if(form.classList.contains('pop-up_type_user')){
+             console.log(button)
+    button.classList.remove(buttonDisabled)
+   button.disabled = false;
+         } else{
+    button.classList.add(buttonDisabled)
+    //button.disabled = false;
+         }*/
+     }
+   _checkEnter(inputList) {
         document.addEventListener('keydown', (event) => {
             if (event.key === "Enter") {
                 if (this._hasInvalidInput(inputList)) {

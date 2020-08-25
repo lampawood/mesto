@@ -2,6 +2,7 @@
     background: rgba(299, 299, 299, 1);
     color: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(0, 0, 0, 0.3);
+    user-select: none;
 }
 .pop-up__save_disabled:hover{
     background: rgba(299, 299, 299, 1);
