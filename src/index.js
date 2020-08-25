@@ -37,6 +37,7 @@ const popupAdd = new PopupWithForm(AddCard, (placeObject) =>{
     cardsList.addItem(createdCard);
 
 })
+popupAdd.setEventListeners()
 addButton.addEventListener('click', () => {
     popupAdd.open();
     cardValidator.hideErrors(popUpAddcard);
