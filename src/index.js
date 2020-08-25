@@ -47,6 +47,7 @@ const popupWithImage = new PopupWithImage(BigPopu, {
     image: document.querySelector('.pop-up-full-image__image'),
     description: document.querySelector('.pop-up-full-image__title')
 });
+popupWithImage.setEventListeners();
 const userInfo = new UserInfo (
     {
         name: document.querySelector('.profile__title'),
@@ -63,20 +64,12 @@ const popupEdit = new PopupWithForm(popupInfo, () => {
     }
 );
 popupEdit.setEventListeners()
-popUp.forEach(element => {
-    element.addEventListener('click', (event) => {
-        if (event.target !== event.currentTarget) {
-            return
-        }
-        element.classList.remove('pop-up__opened')
-    });
-})
-popUpProfile.addEventListener('submit', (event) =>{
+/*popUpProfile.addEventListener('submit', (event) =>{
     if(event.key === "Enter"){
     event.preventDefault();
     userInfo.getUserInfo();
     popUpProfile.classList.remove('pop-up__opened')}
 
-});
+});*/
 cardValidator.enableValidation()
 profileValidator.enableValidation()

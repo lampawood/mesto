@@ -23,5 +23,11 @@ export class Popup {
         closePop.addEventListener('click', () => {
             this.close();
         })
+        this._selector.addEventListener('click', (event) => {
+            if (event.target !== event.currentTarget) {
+                return
+            }
+            this.close();
+        });
     }
 }

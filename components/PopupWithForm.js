@@ -20,9 +20,13 @@ export class PopupWithForm extends Popup{
 
         super.setEventListeners();
         this._form.addEventListener('submit', (ev) => {
+            const button = this._form.querySelector('.pop-up__save');
+            if(button.classList.contains('pop-up__save_disabled')){
+                return false
+            } else {
             ev.preventDefault();
             this._submitAction(this._getInputValues());
-            super.close();
+            this.close();}
         })
     }
 
