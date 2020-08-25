@@ -41,9 +41,8 @@ popupAdd.setEventListeners()
 addButton.addEventListener('click', () => {
     popupAdd.open();
     cardValidator.hideErrors(popUpAddcard);
-  // cardValidator.resetButton(popUpAddcard);
+    cardValidator.resetButton();
 })
-
 const popupWithImage = new PopupWithImage(BigPopu, {
     image: document.querySelector('.pop-up-full-image__image'),
     description: document.querySelector('.pop-up-full-image__title')
@@ -57,12 +56,13 @@ editButton.addEventListener('click', () => {
     popupEdit.open();
     userInfo.getUserInfo();
     profileValidator.hideErrors(popUpProfile, '.pop-up_type_user');
-    profileValidator.resetButton(popUpProfile)
+    profileValidator.resetButton()
 });
 const popupEdit = new PopupWithForm(popupInfo, () => {
         userInfo.setUserInfo();
     }
 );
+popupEdit.setEventListeners()
 popUp.forEach(element => {
     element.addEventListener('click', (event) => {
         if (event.target !== event.currentTarget) {
