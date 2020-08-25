@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='description' content='Задание пятого спринта'>
+    <meta name="keywords" content="html, css, russia, mesto, ">
+    <meta name="author" content="Катя Иванова">
+    <title>Mesto</title>
+</head>
+
+<body class="body">
+    <div class="page">
+        <header class="header">
+            <img class="logo" src="../images/Logo.svg" alt="Логотип">
+        </header>
+        <main class="content">
+            <section class="profile" id="profile">
+                <img class="profile__avatar" src="../images/image.jpg" alt="Портрет Пользователя">
+                <div class="profile__info">
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <p class="profile__subtitle">Исследователь океана</p>
+                </div>
+                <button class="profile__add">
+                </button>
+                <button class="profile__edit">
+                </button>
+            </section>
+            <section class="elements">
+                <template id="card" class="template__card">
+                    <div class="card">
+                        <button class="card__delete"></button>
+                        <img src="#" alt="#" class="card__item" />
+                        <div class="card__info">
+                            <h2 class="card__title"></h2>
+                            <button type="button" class="card__like"></button>
+                        </div>
+                    </div>
+                </template>
+            </section>
+            </section>
+            <section class="pop-up pop-up_type_user" id='user'>
+                <form class="pop-up__form pop-up_type_user_form" name="user" novalidate>
+                    <button class="pop-up__close pop-up__close_user" type="button"></button>
+                    <h2 class="pop-up__title">Редактировать профиль</h2>
+                    <input type="text" id='name__input' class="pop-up__input form-input-type_title pop-up__input_type_name" placeholder="Имя" minlength="2" maxlength="40" required value="">
+                    <span class="form-input-error" id="name__input_error"></span>
+                    <input type="text" id="about__input" class="pop-up__input form-input-type_subtitle pop-up__input_type_about" placeholder="О себе" minlength="2" maxlength="200" required value="">
+                    <span class="form-input-error" id="about__input_error"></span>
+                    <button id="save" class="pop-up__save pop-up__save_user pop-up__button" type="submit">Сохранить</button>
+                </form>
+            </section>
+
+            <section class="pop-up pop-up_type_card" id="add-card">
+                <form class="pop-up__form pop-up_type_card_form" name="card" novalidate>
+                    <button class="pop-up__close pop-up__close_card" type="button"></button>
+                    <h2 class="pop-up__title">Новое место</h2>
+                    <input type="text" name="name" id="title__input" class="pop-up__input form-input-type_title pop-up__card_title" placeholder="Название" minlength="1" maxlength="30" required>
+                    <span class="form-input-error" id="title__input_error"></span>
+                    <input type="url" name="link" id="link__input" class="pop-up__input form-input-type_subtitle pop-up__card_link" placeholder="Ссылка на картинку" required type="url">
+                    <span class="form-input-error" id="link__input_error"></span>
+                    <button id="save" class="pop-up__save pop-up__type_add pop-up__button" type="submit">Создать</button>
+                </form>
+            </section>
+            <section id="pop-up-full-image" class="pop-up-full-image pop-up">
+                <div class="pop-up-full-image__container">
+                    <img src="#" alt="#" class="pop-up-full-image__image">
+                    <h3 class="pop-up-full-image__title"></h3>
+                    <button type="button" class="pop-up-full-image__close pop-up__close"></button>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+        </footer>
+    </div>
+</body>
+
+</html>

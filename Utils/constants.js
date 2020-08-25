@@ -1,0 +1,13 @@
+export const cardForm = '#add-card'
+export const profileForm = '#user'
+export const popUp = document.querySelectorAll('.pop-up')
+export const popUpAddcard = document.querySelector('#add-card')
+export const popUpProfile = document.querySelector('#profile')
+export const proFile = document.querySelector('.profile')
+export const addButton = proFile.querySelector('.profile__add')
+export const editButton = proFile.querySelector('.profile__edit')
+export const popupInfo = document.querySelector('.pop-up_type_user')
+export const AddCard = document.querySelector('.pop-up_type_card')
+export const CardTemplate = document.querySelector('.template__card')
+export const Elements = document.querySelector('.elements')
+export const BigPopu = document.querySelector('.pop-up-full-image')

@@ -6,12 +6,9 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 1.25;
-    margin-bottom: 17px;
     min-height: 15px;
 }
-.form-input-error_active:last-of-type {
-    margin-bottom: 30px;
-}
+
 @media screen and (max-width: 520px) {
     .form-input-error_active {
         font-size: 10px;
