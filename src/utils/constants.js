@@ -1,6 +1,5 @@
 export const cardForm = '#add-card'
 export const profileForm = '#user'
-export const popUp = document.querySelectorAll('.pop-up')
 export const popUpAddcard = document.querySelector('#add-card')
 export const popUpProfile = document.querySelector('#profile')
 export const proFile = document.querySelector('.profile')
