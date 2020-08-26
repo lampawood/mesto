@@ -64,12 +64,5 @@ const popupEdit = new PopupWithForm(popupInfo, () => {
     }
 );
 popupEdit.setEventListeners()
-/*popUpProfile.addEventListener('submit', (event) =>{
-    if(event.key === "Enter"){
-    event.preventDefault();
-    userInfo.getUserInfo();
-    popUpProfile.classList.remove('pop-up__opened')}
-
-});*/
 cardValidator.enableValidation()
 profileValidator.enableValidation()
