@@ -5,18 +5,31 @@ import { PopupWithForm } from './PopupWithForm.js';
 import { UserInfo } from './UserInfo.js';
 import { FormValidator } from './FormValidator.js'
 import { initialCards } from '../utils/utils.js';
-import { validationObj } from './FormValidator.js';
-import { popUpProfile, popUpAddcard, addButton, editButton, cardForm, profileForm, popupInfo, AddCard, CardTemplate, Elements, BigPopu} from '../utils/constants.js'
+import { validationObj } from '../utils/constants.js';
+import { popUpProfile, popUpAddcard, addButton, editButton, cardForm, profileForm, popupInfo, addCard, cardTemplate, elements, bigPopu} from '../utils/constants.js'
 import '../pages/index.css';
 
 const cardValidator = new FormValidator(validationObj, cardForm)
 const profileValidator = new FormValidator(validationObj, profileForm)
 
 
+const getUserInfo = () => {
+
+    return {
+        name_author: userInfo._name.textContent,
+
+        about: this._job.textContent
+   }
+}
+const setUserInfo = ( name, about ) => {
+    this._name.textContent = name
+    this._description.textContent = about
+}
+
 const cardsList = new Section({
     items: initialCards,
     renderer: (el) => {
-        const newCard = new Card(el.name, el.link, CardTemplate,
+        const newCard = new Card(el.name, el.link, cardTemplate,
             (link, name) => {
                 popupWithImage.open(link, name)
             }
@@ -24,13 +37,13 @@ const cardsList = new Section({
         const cardElement = newCard.generateCard();
         cardsList.addItem(cardElement)
     },
-}, Elements)
+}, elements)
 cardsList.renderItem();
 
 
 
-const popupAdd = new PopupWithForm(AddCard, (placeObject) =>{
-    const createdCard = new Card(placeObject.name, placeObject.link, CardTemplate, (image, description) => {
+const popupAdd = new PopupWithForm(addCard, (placeObject) =>{
+    const createdCard = new Card(placeObject.name, placeObject.link, cardTemplate, (image, description) => {
             popupWithImage.open(image, description);
         }
     ).generateCard();
@@ -41,26 +54,31 @@ popupAdd.setEventListeners()
 addButton.addEventListener('click', () => {
     popupAdd.open();
     cardValidator.hideErrors(popUpAddcard);
-    cardValidator.resetButton();
+    //cardValidator.resetButton();
 })
-const popupWithImage = new PopupWithImage(BigPopu, {
+const popupWithImage = new PopupWithImage(bigPopu, {
     image: document.querySelector('.pop-up-full-image__image'),
     description: document.querySelector('.pop-up-full-image__title')
 });
 popupWithImage.setEventListeners();
+
 const userInfo = new UserInfo (
     {
         name: document.querySelector('.profile__title'),
         job: document.querySelector('.profile__subtitle')
     });
+
 editButton.addEventListener('click', () => {
     popupEdit.open();
-    userInfo.getUserInfo();
+    getUserInfo(userInfo);
+    setUserInfo();
+
     profileValidator.hideErrors(popUpProfile, '.pop-up_type_user');
-    profileValidator.resetButton()
+    //profileValidator.resetButton()
 });
 const popupEdit = new PopupWithForm(popupInfo, () => {
-        userInfo.setUserInfo();
+        userInfo.setUserInfo(name, job);
+        setUserInfo();
     }
 );
 popupEdit.setEventListeners()

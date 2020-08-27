@@ -1,12 +1,3 @@
-export const validationObj = {
-    formsSelector: '.pop-up__form',
-    inputSelector: '.pop-up__input',
-    submitButtonSelector: '.pop-up__save',
-    buttonDisabledClass: 'pop-up__save_disabled',
-    inputErrorBorder: 'form-input-type_error',
-    inputError: 'form-input-error_active'
-};
-
 export class FormValidator {
     constructor(obj, validForm) {
         this._form = document.querySelector(validForm)
@@ -14,7 +5,9 @@ export class FormValidator {
         this._inputSelector = obj.inputSelector;
         this._buttonDisabled = obj.buttonDisabledClass;
         this._inputError = obj.inputError;
-        this._inputErrorClass = obj.inputErrorBorder
+        this._inputErrorClass = obj.inputErrorBorder;
+        this._formInputError = obj.formInputErr;
+        this._formInputErrorActive = obj.formInputErrActive
     }
 
 
@@ -32,12 +25,12 @@ export class FormValidator {
         errorElement.textContent = '';}
     hideErrors = () => {
         const inputs = Array.from(this._form.querySelectorAll(this._inputSelector))
-        const errors = Array.from(this._form.querySelectorAll('.form-input-error'))
+        const errors = Array.from(this._form.querySelectorAll(this._formInputErrorActive))
         inputs.forEach(el => {
             el.classList.remove(this._inputErrorClass);
         })
         errors.forEach(errorElement => {
-            errorElement.classList.remove('form-input-error_active');
+            errorElement.classList.remove(this._formInputError);
             errorElement.textContent = '';
         })
     }
@@ -60,17 +53,18 @@ export class FormValidator {
 
         if (this._hasInvalidInput(inputList)) {
             this._submitButton.classList.add(this._buttonDisabled)
+
         } else {
             this._submitButton.classList.remove(this._buttonDisabled)
         }
     }
-    resetButton = () => {
+   /* resetButton = () => {
         if(this._form.classList.contains('pop-up_type_user')){
             this._submitButton.classList.remove(this._buttonDisabled)
         } else{
             this._submitButton.classList.add(this._buttonDisabled)
         }
-    }
+    }*/
     _setEventListeners() {
         const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
         this._toggleButtonState(inputList);

@@ -1,7 +1,7 @@
 import {Popup} from "./Popup.js";
 
 export class PopupWithForm extends Popup{
-    constructor (popupSelector, submitAction ) {
+    constructor (popupSelector, submitAction) {
         super(popupSelector);
         this._submitAction = submitAction;
         this._form = this._selector.querySelector('.pop-up__form');
@@ -17,7 +17,6 @@ export class PopupWithForm extends Popup{
     }
 
     setEventListeners() {
-
         super.setEventListeners();
         this._form.addEventListener('submit', (ev) => {
             const button = this._form.querySelector('.pop-up__save');
@@ -31,8 +30,6 @@ export class PopupWithForm extends Popup{
     }
 
     close()
-{
-    super.close();
-    this._form.reset();
-}
+    {super.close();
+    this._form.reset(); }
 }
