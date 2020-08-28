@@ -5,26 +5,11 @@ import { PopupWithForm } from './PopupWithForm.js';
 import { UserInfo } from './UserInfo.js';
 import { FormValidator } from './FormValidator.js'
 import { initialCards } from '../utils/utils.js';
-import { validationObj } from '../utils/constants.js';
-import { popUpProfile, popUpAddcard, addButton, editButton, cardForm, profileForm, popupInfo, addCard, cardTemplate, elements, bigPopu} from '../utils/constants.js'
+import { popUpProfile, popUpAddcard, addButton, editButton, cardForm, profileForm, popupInfo, addCard, cardTemplate, elements, bigPopu, validationObj, nameInput, jobInput} from '../utils/constants.js'
 import '../pages/index.css';
 
 const cardValidator = new FormValidator(validationObj, cardForm)
 const profileValidator = new FormValidator(validationObj, profileForm)
-
-
-const getUserInfo = () => {
-
-    return {
-        name_author: userInfo._name.textContent,
-
-        about: this._job.textContent
-   }
-}
-const setUserInfo = ( name, about ) => {
-    this._name.textContent = name
-    this._description.textContent = about
-}
 
 const cardsList = new Section({
     items: initialCards,
@@ -70,15 +55,17 @@ const userInfo = new UserInfo (
 
 editButton.addEventListener('click', () => {
     popupEdit.open();
-    getUserInfo(userInfo);
-    setUserInfo();
-
+    UserInfo.getUserInfo();
+    const addData = ({name, job}) => {
+        name = nameInput.value;
+        job = jobInput.value;
+    }
     profileValidator.hideErrors(popUpProfile, '.pop-up_type_user');
     //profileValidator.resetButton()
 });
 const popupEdit = new PopupWithForm(popupInfo, () => {
-        userInfo.setUserInfo(name, job);
-        setUserInfo();
+        UserInfo.setUserInfo();
+
     }
 );
 popupEdit.setEventListeners()

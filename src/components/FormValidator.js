@@ -53,18 +53,13 @@ export class FormValidator {
 
         if (this._hasInvalidInput(inputList)) {
             this._submitButton.classList.add(this._buttonDisabled)
-
+            this._submitButton.disabled = true;
         } else {
             this._submitButton.classList.remove(this._buttonDisabled)
+            this._submitButton.disabled = false;
         }
     }
-   /* resetButton = () => {
-        if(this._form.classList.contains('pop-up_type_user')){
-            this._submitButton.classList.remove(this._buttonDisabled)
-        } else{
-            this._submitButton.classList.add(this._buttonDisabled)
-        }
-    }*/
+
     _setEventListeners() {
         const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
         this._toggleButtonState(inputList);
