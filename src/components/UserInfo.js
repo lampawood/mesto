@@ -8,8 +8,8 @@ export class UserInfo {
             this._name.textContent = name;
             this._job.textContent = job
     }
-    getUserInfo = () => {
 
+    getUserInfo = () => {
         return {
             name: this._name.textContent,
             job: this._job.textContent

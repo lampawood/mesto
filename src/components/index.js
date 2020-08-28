@@ -11,40 +11,38 @@ import '../pages/index.css';
 const cardValidator = new FormValidator(validationObj, cardForm)
 const profileValidator = new FormValidator(validationObj, profileForm)
 
+const placeCard = function (place) {
+    const newPlaceCard = new Card (place.name, place.link, cardTemplate, (link, name) => {
+        popupWithImage.open(link, name);
+    })
+    return newPlaceCard.generateCard()
+}
+
 const cardsList = new Section({
     items: initialCards,
     renderer: (el) => {
-        const newCard = new Card(el.name, el.link, cardTemplate,
-            (link, name) => {
-                popupWithImage.open(link, name)
-            }
-        );
-        const cardElement = newCard.generateCard();
-        cardsList.addItem(cardElement)
+        cardsList.addItem(placeCard(el))
     },
 }, elements)
 cardsList.renderItem();
 
-
-
 const popupAdd = new PopupWithForm(addCard, (placeObject) =>{
-    const createdCard = new Card(placeObject.name, placeObject.link, cardTemplate, (image, description) => {
-            popupWithImage.open(image, description);
-        }
-    ).generateCard();
-    cardsList.addItem(createdCard);
+    cardsList.addItem(placeCard(placeObject));
 
 })
+
 popupAdd.setEventListeners()
 addButton.addEventListener('click', () => {
     popupAdd.open();
     cardValidator.hideErrors(popUpAddcard);
-    //cardValidator.resetButton();
+    cardValidator.resetButton(false);
 })
+
 const popupWithImage = new PopupWithImage(bigPopu, {
     image: document.querySelector('.pop-up-full-image__image'),
     description: document.querySelector('.pop-up-full-image__title')
 });
+
 popupWithImage.setEventListeners();
 
 const userInfo = new UserInfo (
@@ -55,19 +53,21 @@ const userInfo = new UserInfo (
 
 editButton.addEventListener('click', () => {
     popupEdit.open();
-    UserInfo.getUserInfo();
-    const addData = ({name, job}) => {
-        name = nameInput.value;
-        job = jobInput.value;
-    }
+    const user = userInfo.getUserInfo();
+    nameInput.value = user.name
+    jobInput.value = user.job
     profileValidator.hideErrors(popUpProfile, '.pop-up_type_user');
-    //profileValidator.resetButton()
 });
-const popupEdit = new PopupWithForm(popupInfo, () => {
-        UserInfo.setUserInfo();
 
+const popupEdit = new PopupWithForm(popupInfo, () => {
+        userInfo.setUserInfo({
+            name: nameInput.value,
+            job: jobInput.value
+        });
     }
 );
+
 popupEdit.setEventListeners()
 cardValidator.enableValidation()
 profileValidator.enableValidation()
+cardValidator.hideErrors(popUpAddcard);

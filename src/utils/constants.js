@@ -10,8 +10,8 @@ export const addCard = document.querySelector('.pop-up_type_card')
 export const cardTemplate = document.querySelector('.template__card')
 export const elements = document.querySelector('.elements')
 export const bigPopu = document.querySelector('.pop-up-full-image')
-export const jobInput = popUpProfile.querySelector('.pop-up__input_type_about')
-export const nameInput = popUpProfile.querySelector('.pop-up__input_type_name')
+export const jobInput = document.querySelector('.pop-up__input_type_about')
+export const nameInput = document.querySelector('.pop-up__input_type_name')
 
 export const validationObj = {
     formsSelector: '.pop-up__form',
@@ -20,6 +20,6 @@ export const validationObj = {
     buttonDisabledClass: 'pop-up__save_disabled',
     inputErrorBorder: 'form-input-type_error',
     inputError: 'form-input-error_active',
-    formInputErr: 'form-input-error',
+    formInputErr: '.form-input-error',
     formInputErrActive: 'form-input-error_active'
 };

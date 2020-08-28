@@ -4,8 +4,7 @@ export class PopupWithImage extends Popup {
             super(popupSelector);
             this._image = image;
             this._description = description;
-
-    }
+        }
 
     open(img, description) {
         super.open();

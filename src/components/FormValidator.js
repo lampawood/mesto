@@ -7,7 +7,6 @@ export class FormValidator {
         this._inputError = obj.inputError;
         this._inputErrorClass = obj.inputErrorBorder;
         this._formInputError = obj.formInputErr;
-        this._formInputErrorActive = obj.formInputErrActive
     }
 
 
@@ -23,9 +22,10 @@ export class FormValidator {
         inputElement.classList.remove(this._inputErrorClass);
         errorElement.classList.remove(this._inputError);
         errorElement.textContent = '';}
+
     hideErrors = () => {
         const inputs = Array.from(this._form.querySelectorAll(this._inputSelector))
-        const errors = Array.from(this._form.querySelectorAll(this._formInputErrorActive))
+        const errors = Array.from(this._form.querySelectorAll(this._formInputError))
         inputs.forEach(el => {
             el.classList.remove(this._inputErrorClass);
         })
@@ -57,6 +57,15 @@ export class FormValidator {
         } else {
             this._submitButton.classList.remove(this._buttonDisabled)
             this._submitButton.disabled = false;
+        }
+    }
+
+    resetButton = (isActive) => {
+
+        if(isActive === true) {
+            this._submitButton.classList.remove(this._buttonDisabled)
+        } else {
+            this._submitButton.classList.add(this._buttonDisabled)
         }
     }
 
