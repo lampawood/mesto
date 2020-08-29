@@ -1,25 +1,36 @@
-export const cardForm = '#add-card'
-export const profileForm = '#user'
-export const popUpAddcard = document.querySelector('#add-card')
-export const popUpProfile = document.querySelector('#profile')
-export const proFile = document.querySelector('.profile')
-export const addButton = proFile.querySelector('.profile__add')
-export const editButton = proFile.querySelector('.profile__edit')
-export const popupInfo = document.querySelector('.pop-up_type_user')
-export const addCard = document.querySelector('.pop-up_type_card')
-export const cardTemplate = document.querySelector('.template__card')
-export const elements = document.querySelector('.elements')
-export const bigPopu = document.querySelector('.pop-up-full-image')
-export const jobInput = document.querySelector('.pop-up__input_type_about')
-export const nameInput = document.querySelector('.pop-up__input_type_name')
+const popupInfo = document.querySelector('.popup_info')
+const popupImage = document.querySelector('.popup_image')
+const popupDel = document.querySelector('.popup_delete-card')
+const popupAvatar = document.querySelector('.popup_avatar')
+const imageInPopup = document.querySelector('.popup__image')
+const nameImageInPopup = document.querySelector('.popup__image-name')
+const nameProfile = document.querySelector('.profile__name')
+const descriptionProfile = document.querySelector('.profile__description')
+const nameInput = document.querySelector('.popup__input_name')
+const descriptionInput = document.querySelector('.popup__input_description')
+const editAvatarButton = document.querySelector('.profile__edit-avatar-button')
 
-export const validationObj = {
-    formsSelector: '.pop-up__form',
-    inputSelector: '.pop-up__input',
-    submitButtonSelector: '.pop-up__save',
-    buttonDisabledClass: 'pop-up__save_disabled',
-    inputErrorBorder: 'form-input-type_error',
-    inputError: 'form-input-error_active',
-    formInputErr: '.form-input-error',
-    formInputErrActive: 'form-input-error_active'
-};
+const editButton = document.querySelector('.profile__edit-button')
+const popupPlace = document.querySelector('.popup_place')
+const formInfo = document.querySelector('.popup__form_info')
+const addButton = document.querySelector('.profile__add-button')
+const formPlace = document.querySelector('.popup__form_place')
+const formAvatar = document.querySelector('.popup__form_avatar')
+const placeTemplate = document.querySelector('.place-template').content
+const placeList = document.querySelector('.places__list')
+const submitButtonPlace = document.querySelector('.popup__button_type_place')
+const submitButtonInfo = document.querySelector('.popup__button_type_info')
+const submitButtonAvatar = document.querySelector('.popup__button_type_avatar')
+
+const settingsObject = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+  errorSelector: '.popup__input-error'
+}
+
+export { popupInfo, popupImage, imageInPopup, nameImageInPopup, nameProfile, descriptionProfile, nameInput, descriptionInput,
+  editButton, popupPlace, formInfo, addButton, formPlace, placeList, placeTemplate, settingsObject, popupDel, editAvatarButton,
+  popupAvatar, formAvatar, submitButtonAvatar, submitButtonInfo, submitButtonPlace }

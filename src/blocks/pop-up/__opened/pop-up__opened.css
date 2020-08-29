@@ -1,6 +1,0 @@
-.pop-up.pop-up__opened {
-    z-index: 3;
-    opacity: 1;
-    visibility: visible;
-    transition: visibility .6s, opacity .3s linear;
-}

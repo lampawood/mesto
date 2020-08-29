@@ -1,9 +1,9 @@
-.page{
-    min-width: 320px;
-    max-width: calc(1280px - 398px);
-    margin: 0 auto;
-    font-family: 'Inter', 'Arial', sans-serif;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
+.page {
+  background: black;
+  min-width: 300px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: normal;
+  min-height: 100vh;
 }

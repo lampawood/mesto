@@ -1,0 +1,11 @@
+.place__image {
+  object-fit: cover;
+  max-width: 100%;
+  max-height: 282px;
+  align-self: stretch;
+  flex-basis: 282px;
+}
+
+.place__image:hover {
+  cursor: pointer;
+}

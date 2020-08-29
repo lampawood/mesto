@@ -1,6 +1,15 @@
-.profile__avatar{
-    max-width: 120px;
-    margin: 0 auto;
-    border-radius: 80px;
-    grid-area: avatar;
+.profile__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: center no-repeat;
+  background-size: cover;
+  position: relative;
+  cursor: pointer;
+}
+
+.profile__avatar:hover .profile__edit-avatar-button {
+  display: block;
+  background: url(../../../images/pencil.svg) rgba(0, 0, 0, .8) center no-repeat;
 }

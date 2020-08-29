@@ -1,11 +1,15 @@
-.header{
-     padding-top: 45px;
-     max-height: 74px;
-     border-bottom: 1px solid #545454;
+@import url(__logo/header__logo.css);
+
+.header {
+  width: 100%;
+  padding-top: 45px;
+  border-bottom: 1px solid rgba(84,84,84, .7);
+  max-width: 882px;
+  margin: 0 auto;
 }
-@media (max-width:881px){
-     .header{
-          max-width: 880px;
-          padding-top: 28px;
-     }
+
+@media screen and (max-width: 881px) {
+  .header {
+    padding-top: 28px;
+  }
 }

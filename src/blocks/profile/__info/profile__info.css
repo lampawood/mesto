@@ -1,11 +1,18 @@
-.profile__info{
-display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 65% 35%;
-  grid-template-areas: "title" 
-  "subtitle";
-  grid-area: info;
-  max-height: 120px;
-  max-width: 295px;
-  padding-left: 7%;
+.profile__info {
+  margin-left: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 400px;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+}
+
+@media screen and (max-width: 881px) {
+  .profile__info {
+    margin: 14px 0 0;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
 }

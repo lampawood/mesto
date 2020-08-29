@@ -1,0 +1,14 @@
+.place__button-like {
+  padding: 0;
+  background: url(../../../images/heart.svg);
+  border: none;
+  width: 21px;
+  height: 18px;
+  object-fit: cover;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.place__button-like:hover {
+  opacity: .6;
+}

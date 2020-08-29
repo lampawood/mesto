@@ -1,0 +1,16 @@
+.indent {
+  margin: 0 auto;
+  max-width: 882px;
+}
+
+@media screen and (max-width: 581px) {
+  .indent {
+    max-width: 282px;
+  }
+}
+
+@media screen and (min-width: 582px) and (max-width:881px) {
+  .indent {
+    max-width: 582px;
+  }
+}
