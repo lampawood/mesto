@@ -1,4 +1,4 @@
-
+import{ popupAvatar } from "../utils/constants";
 
 export default class UserInfo {
   constructor({ name, description }) {
@@ -19,6 +19,6 @@ export default class UserInfo {
   }
 
   setAvatar(avatar) {
-    document.querySelector('.profile__avatar').style.backgroundImage = 'url('+avatar+')'
+    popupAvatar.style.backgroundImage = 'url('+avatar+')'
   }
 }

@@ -28,7 +28,8 @@ const settingsObject = {
   inactiveButtonClass: 'popup__button_inactive',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active',
-  errorSelector: '.popup__input-error'
+  errorSelector: '.popup__input-error',
+  infoButton: 'popup__button_type_info'
 }
 
 export { popupInfo, popupImage, imageInPopup, nameImageInPopup, nameProfile, descriptionProfile, nameInput, descriptionInput,

@@ -7,6 +7,7 @@ export default class FormValidator {
     this._inputErrorClass = settingsObject.inputErrorClass;
     this._errorClass = settingsObject.errorClass;
     this._errorSelector = settingsObject.errorSelector;
+    this._infoButton = settingsObject.infoButton;
   }
 
   _showInputError (inputElement, errorMessage) {
@@ -65,7 +66,7 @@ export default class FormValidator {
   }
 
   resetButton () {
-    if (this._buttonElement.classList.contains('popup__button_type_info')) {
+    if (this._buttonElement.classList.contains(this._infoButton)) {
       this._activeSubmit()
     }
     else {

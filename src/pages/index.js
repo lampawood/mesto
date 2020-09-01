@@ -20,24 +20,28 @@ const api = new Api({
   }
 })
 
-// Загрузка данных пользователя с сервера
-api.getUserInfo()
-  .then((data) => {
-    api.userInfo = data
-    user.setUserInfo({ name: data.name, about: data.about })
-    user.setAvatar(data.avatar)
-    // Загрузка карточек с сервера
-    api.getInitialCards()
-      .then((cards) => {
-        renderCards(cards).renderItems()
-      })
-      .catch((err) => {
+
+Promise.all([
+    api.getInitialCards(),
+    api.getUserInfo()
+]).then(
+    ([cards, user]) => {
+            api.userInfo = data
+            user.setUserInfo({ name: data.name, about: data.about })
+            user.setAvatar(data.avatar)
+            // Загрузка карточек с сервера
+            rendererCards(cards).renderItems()
+
+
+        })
+
+    .catch((err) => {
         console.log(err) // выведем ошибку в консоль
-      })
-  })
-  .catch((err) => {
-    console.log(err) // выведем ошибку в консоль
-  })
+    });
+
+
+// Загрузка данных пользователя с сервера
+
 
 // Изменение данных о пользователе
 const handleUserInfo = function (userData) {
@@ -168,7 +172,11 @@ editAvatarButton.addEventListener('click', () =>{
 const placeFormValidator = new FormValidator (settingsObject, formPlace)
 const infoFormValidator = new FormValidator(settingsObject, formInfo)
 const avatarFormValidator = new FormValidator(settingsObject, formAvatar)
+const rendererCards = new renderCards();
+const popupWithImage = new popupWithImage;
 
+
+popupWithImage.setEventListeners()
 placeFormValidator.enableValidation()
 infoFormValidator.enableValidation()
 avatarFormValidator.enableValidation()
