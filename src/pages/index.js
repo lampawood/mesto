@@ -21,26 +21,26 @@ const api = new Api({
 })
 
 
-Promise.all([
-    api.getInitialCards(),
-    api.getUserInfo()
-]).then(
-    ([cards, user]) => {
-            api.userInfo = data
-            user.setUserInfo({ name: data.name, about: data.about })
-            user.setAvatar(data.avatar)
-            // Загрузка карточек с сервера
-            rendererCards(cards).renderItems()
+const firstPromise = new Promise((resolve, reject) => {
+    resolve(api.getInitialCards())
+});
 
+const secondPromise = new Promise((resolve, reject) => {
+    resolve(api.getUserInfo())
+});
 
-        })
+const arrayPromise = [firstPromise, secondPromise]
 
-    .catch((err) => {
-        console.log(err) // выведем ошибку в консоль
-    });
+Promise.all(arrayPromise)
+    .then(([cards, data]) => {
+        api.userInfo = data
+        user.setAvatar(data.avatar)
+        user.setUserInfo({ name: data.name, about: data.about })
+        //user.setAvatar(data.avatar)
+        renderCards(cards).renderItems()
 
-
-// Загрузка данных пользователя с сервера
+        }
+    )
 
 
 // Изменение данных о пользователе
@@ -173,7 +173,6 @@ const placeFormValidator = new FormValidator (settingsObject, formPlace)
 const infoFormValidator = new FormValidator(settingsObject, formInfo)
 const avatarFormValidator = new FormValidator(settingsObject, formAvatar)
 const rendererCards = new renderCards();
-const popupWithImage = new popupWithImage;
 
 
 popupWithImage.setEventListeners()
