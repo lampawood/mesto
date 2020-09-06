@@ -21,27 +21,24 @@ const api = new Api({
 })
 
 
-const firstPromise = new Promise((resolve, reject) => {
-    resolve(api.getInitialCards())
-});
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+    .then(([data, items]) => {
+        user.setUserInfo(data);
+        cardsList.renderItems(items);
+    })
+    .catch((err) => console.log(err));
 
-const secondPromise = new Promise((resolve, reject) => {
-    resolve(api.getUserInfo())
-});
-
-const arrayPromise = [firstPromise, secondPromise]
-
-Promise.all(arrayPromise)
+/*Promise.all([api.getInitialCards(), api.getUserInfo()])
     .then(([cards, data]) => {
         api.userInfo = data
         user.setAvatar(data.avatar)
         user.setUserInfo({ name: data.name, about: data.about })
         //user.setAvatar(data.avatar)
-        renderCards(cards).renderItems()
+        cardList.renderItems(cards)
 
         }
     )
-
+*/
 
 // Изменение данных о пользователе
 const handleUserInfo = function (userData) {
@@ -80,7 +77,7 @@ const addNewCard = function (card) {
   setLoading(true, submitButtonPlace)
   api.postNewCard(card.name, card.link)
     .then((card) => {
-      renderCards().addNewCard(createPlaceCard(card))
+      cardsList.addNewCard(createPlaceCard(card))
       placePopup.close()
     })
     .catch((err) => {
@@ -95,7 +92,6 @@ const popupWithImage = new PopupWithImage(popupImage, imageInPopup, nameImageInP
 
 const handleCardClick = function (placeImage, placeName) {
   popupWithImage.open(placeImage, placeName)
-  popupWithImage.setEventListeners()
 }
 
 // Удаление карточки
@@ -114,18 +110,8 @@ const createPlaceCard = function (place) {
   return newPlaceCard.generateCard()
 }
 
-// Отрисовка карточек
-const renderCards = function (cards) {
-  const cardsList = new Section({
-      items: cards,
-      renderer: (place) => {
-        cardsList.addItem(createPlaceCard(place))
-      },
-    },
-    placeList
-  )
-  return cardsList
-}
+
+
 
 const user = new UserInfo({
   name: nameProfile,
@@ -172,8 +158,26 @@ editAvatarButton.addEventListener('click', () =>{
 const placeFormValidator = new FormValidator (settingsObject, formPlace)
 const infoFormValidator = new FormValidator(settingsObject, formInfo)
 const avatarFormValidator = new FormValidator(settingsObject, formAvatar)
-const rendererCards = new renderCards();
 
+// Отрисовка карточек
+
+
+const cardsList = new Section(
+    {
+        renderer: (items) => cardsList.addItem(createPlaceCard(items)),
+    },
+    placeList
+);
+
+/*const cardsList = new Section({
+    items: items,
+    renderer: (place) => {
+        cardsList.addItem(createPlaceCard(place))
+    },
+},
+    placeList
+)
+*/
 
 popupWithImage.setEventListeners()
 placeFormValidator.enableValidation()
