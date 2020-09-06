@@ -22,9 +22,9 @@ const api = new Api({
 
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-    .then(([data, items]) => {
+    .then(([user, items]) => {
         user.setUserInfo(data);
-        cardsList.renderItems(items);
+        starterCards.renderItems(items);
     })
     .catch((err) => console.log(err));
 
@@ -33,8 +33,13 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
         api.userInfo = data
         user.setAvatar(data.avatar)
         user.setUserInfo({ name: data.name, about: data.about })
-        //user.setAvatar(data.avatar)
-        cardList.renderItems(cards)
+        const starterCards = new Section(
+    {
+        renderer: (item) => createPlaceCard(item)
+    },
+    placeList
+);
+        starterCards.renderItems(cards)
 
         }
     )
@@ -77,8 +82,8 @@ const addNewCard = function (card) {
   setLoading(true, submitButtonPlace)
   api.postNewCard(card.name, card.link)
     .then((card) => {
-      cardsList.addNewCard(createPlaceCard(card))
-      placePopup.close()
+        placePopup.close()
+      starterCards.addNewCard(createPlaceCard(card))
     })
     .catch((err) => {
       console.log(err) // выведем ошибку в консоль
@@ -105,13 +110,21 @@ const handleDeleteClick = function (cardId) {
 
 // создание карточки
 
-const createPlaceCard = function (place) {
+/*const createPlaceCard = function (place) {
   const newPlaceCard = new Card (place, placeTemplate, handleCardClick, api.userInfo._id, handleDeleteClick, api)
   return newPlaceCard.generateCard()
+}*/
+
+/*function createPlaceCard(place) {
+    const newPlaceCard = new Card (place, placeTemplate, handleCardClick, api.userInfo, handleDeleteClick, api)
+    starterCards.addItem(newPlaceCard.generateCard())
+
+}*/
+
+const createPlaceCard = function (place) {
+    const newPlaceCard = new Card (place, placeTemplate, handleCardClick, api.userInfo._id, handleDeleteClick, api)
+    return newPlaceCard.generateCard()
 }
-
-
-
 
 const user = new UserInfo({
   name: nameProfile,
@@ -126,6 +139,14 @@ const placePopup = new PopupWithForm(popupPlace, (place) => {
 const infoPopup = new PopupWithForm(popupInfo, handleUserInfo)
 
 const avatarPopup = new PopupWithForm(popupAvatar, handleAvatar)
+
+
+const starterCards = new Section(
+    {
+        renderer: (item) => createPlaceCard(item)
+    },
+    placeList
+);
 
 placePopup.setEventListeners()
 infoPopup.setEventListeners()
@@ -162,12 +183,7 @@ const avatarFormValidator = new FormValidator(settingsObject, formAvatar)
 // Отрисовка карточек
 
 
-const cardsList = new Section(
-    {
-        renderer: (items) => cardsList.addItem(createPlaceCard(items)),
-    },
-    placeList
-);
+
 
 /*const cardsList = new Section({
     items: items,
