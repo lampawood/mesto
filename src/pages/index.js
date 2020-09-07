@@ -10,7 +10,8 @@ import Api from '../components/Api.js'
 import { setLoading } from '../utils/utils.js'
 import { popupInfo, nameProfile, editButton, popupPlace, formInfo, addButton, formPlace, placeTemplate, placeList,
   settingsObject, popupDel, editAvatarButton, popupAvatar, formAvatar, submitButtonPlace, submitButtonInfo, submitButtonAvatar,
-  descriptionProfile, popupImage, imageInPopup, nameImageInPopup, nameInput, descriptionInput } from '../utils/constants.js'
+  descriptionProfile, popupImage, imageInPopup, nameImageInPopup, nameInput, descriptionInput, avatarProfile } from '../utils/constants.js'
+import { config } from '../components/config.js'
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
@@ -22,33 +23,18 @@ const api = new Api({
 
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-    .then(([user, items]) => {
+    .then(([data, items]) => {
         user.setUserInfo(data);
+        user.setAvatar(data);
         starterCards.renderItems(items);
     })
     .catch((err) => console.log(err));
 
-/*Promise.all([api.getInitialCards(), api.getUserInfo()])
-    .then(([cards, data]) => {
-        api.userInfo = data
-        user.setAvatar(data.avatar)
-        user.setUserInfo({ name: data.name, about: data.about })
-        const starterCards = new Section(
-    {
-        renderer: (item) => createPlaceCard(item)
-    },
-    placeList
-);
-        starterCards.renderItems(cards)
-
-        }
-    )
-*/
 
 // Изменение данных о пользователе
 const handleUserInfo = function (userData) {
   setLoading(true, submitButtonInfo)
-  api.patchUserInfo(userData.name, userData.about)
+  api.patchUserInfo(userData.name, userData.description)
     .then((info) => {
       user.setUserInfo(info)
       infoPopup.close()
@@ -66,7 +52,7 @@ const handleAvatar = function (linkObject) {
   setLoading(true, submitButtonAvatar)
   api.patchAvatar(linkObject.avatar)
     .then((res) => {
-      user.setAvatar(res.avatar)
+      user.setAvatar(res)
       avatarPopup.close()
     })
     .catch((err) => {
@@ -83,7 +69,7 @@ const addNewCard = function (card) {
   api.postNewCard(card.name, card.link)
     .then((card) => {
         placePopup.close()
-      starterCards.addNewCard(createPlaceCard(card))
+      starterCards.addItem(card)
     })
     .catch((err) => {
       console.log(err) // выведем ошибку в консоль
@@ -103,32 +89,24 @@ const handleCardClick = function (placeImage, placeName) {
 
 const popupDelCard = new PopupForDeleteCard(popupDel, api)
 
-const handleDeleteClick = function (cardId) {
+const handleDeleteClick = function (cardId, evt) {
   popupDelCard.open()
-  popupDelCard.setEventListeners(cardId)
+  popupDelCard.setEventListeners(cardId, evt)
+    console.log(cardId)
 }
 
 // создание карточки
 
-/*const createPlaceCard = function (place) {
-  const newPlaceCard = new Card (place, placeTemplate, handleCardClick, api.userInfo._id, handleDeleteClick, api)
-  return newPlaceCard.generateCard()
-}*/
+const render = (place) => {
+    const newPlaceCard = new Card (place, placeTemplate, handleCardClick, handleDeleteClick, api, config)
+    return newPlaceCard.generateCard(place)
 
-/*function createPlaceCard(place) {
-    const newPlaceCard = new Card (place, placeTemplate, handleCardClick, api.userInfo, handleDeleteClick, api)
-    starterCards.addItem(newPlaceCard.generateCard())
-
-}*/
-
-const createPlaceCard = function (place) {
-    const newPlaceCard = new Card (place, placeTemplate, handleCardClick, api.userInfo._id, handleDeleteClick, api)
-    return newPlaceCard.generateCard()
 }
-
-const user = new UserInfo({
+const user = new UserInfo(config, {
   name: nameProfile,
-  description: descriptionProfile
+  description: descriptionProfile,
+    avatar: avatarProfile,
+
 })
 
 // создадим экземпляры класса Popup для каждого попапа
@@ -141,12 +119,7 @@ const infoPopup = new PopupWithForm(popupInfo, handleUserInfo)
 const avatarPopup = new PopupWithForm(popupAvatar, handleAvatar)
 
 
-const starterCards = new Section(
-    {
-        renderer: (item) => createPlaceCard(item)
-    },
-    placeList
-);
+
 
 placePopup.setEventListeners()
 infoPopup.setEventListeners()
@@ -183,17 +156,12 @@ const avatarFormValidator = new FormValidator(settingsObject, formAvatar)
 // Отрисовка карточек
 
 
-
-
-/*const cardsList = new Section({
-    items: items,
-    renderer: (place) => {
-        cardsList.addItem(createPlaceCard(place))
-    },
-},
+const starterCards = new Section(
+    render,
     placeList
-)
-*/
+);
+
+
 
 popupWithImage.setEventListeners()
 placeFormValidator.enableValidation()

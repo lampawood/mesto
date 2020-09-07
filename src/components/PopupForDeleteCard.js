@@ -6,19 +6,20 @@ export default class PopupForDeleteCard extends Popup {
     this._api = api;
   }
 
-  setEventListeners(cardId) {
+  setEventListeners(cardId, evt) {
     super.setEventListeners()
     const okButton = this._popup.querySelector('.popup__button')
     okButton.addEventListener('click', () => {
-      this._deleteClickHandler(cardId)
+      this._deleteClickHandler(cardId, evt)
     })
   }
 
-  _deleteClickHandler(cardId) {
+  _deleteClickHandler(cardId, evt) {
+    this._card = evt.target.parentElement
     this._api.deleteCard(cardId)
       .then(res => {
-        const card = document.getElementById(cardId)
-        card.remove()
+        console.log(this._card)
+        this._card.remove()
         this.close()
         console.log(res)
       })

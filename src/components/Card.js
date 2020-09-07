@@ -1,11 +1,10 @@
 export default class Card {
-  constructor(place, template, openPopupWithImage, myId, openPopupDeleteCard, api) {
+  constructor(place, template, openPopupWithImage,  openPopupDeleteCard, api, config) {
     this._name = place.name;
     this._link = place.link;
     this._id = place._id;
     this._likes = place.likes;
-    this._owner = place.owner;
-    this._myId = myId;
+    this._myId = config.myId;
     this._template = template;
     this._openPopupWithImage = openPopupWithImage;
     this._openPopupDeleteCard = openPopupDeleteCard;
@@ -19,7 +18,7 @@ export default class Card {
   }
 
   // Метод, который вставит данные в разметку и подготовит карточку к публикации.
-  generateCard() {
+  generateCard(item) {
     this._element = this._getTemplate()
     const placeImage = this._element.querySelector('.place__image')
     const placeName = this._element.querySelector('.place__name')
@@ -30,14 +29,13 @@ export default class Card {
     placeImage.src = this._link
     placeImage.alt = this._name
     placeName.textContent = this._name
-    place.id = this._id
 
     if (this._likes.length>=1) {
       this._placeLikes.textContent = this._likes.length
     }
 
     // если id автора карточки = id владельца страницы, то добавить карточке кнопку удаления и навесить на нее листенер
-    if (this._owner._id === this._myId) {
+    if (item.owner._id === this._myId) {
       const cardDeleteButton = document.createElement('button')
       cardDeleteButton.classList.add('place__button-delete', 'transition')
       cardDeleteButton.setAttribute('type', 'button')
@@ -45,25 +43,26 @@ export default class Card {
       this._element.querySelector('.place').appendChild(cardDeleteButton)
 
       // добавим листенер для открытия попапа по клику на иконку удаления
-      cardDeleteButton.addEventListener('click', () => {
-        this._openPopupDeleteCard(this._id)
+      cardDeleteButton.addEventListener('click', (evt) => {
+        this._openPopupDeleteCard(this._id, evt)
       })
     }
 
     // переберём список лайков элемента, и если есть лайк владельца страницы, закрасим сердечко
-    this._likes.forEach((like) => {
-      if(like._id === this._myId) {
-        const likeButton = this._element.querySelector('.place__button-like')
-        likeButton.classList.add('place__button-like_active')
-      }
-    })
+    if (this._isLikedMe()) {
+      const likeButton = this._element.querySelector('.place__button-like')
+      likeButton.classList.add('place__button-like_active')
+    }
+
 
     // добавим остальные листенеры
     this._placeListeners(placeImage, placeName)
     // Вернём элемент наружу
     return this._element
   }
-
+  _isLikedMe() {
+    return this._likes.some((elem) => elem._id === this._myId);
+  }
   // Лайки
   _like(evt) {
     // если лайк был проставлен
