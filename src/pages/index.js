@@ -14,9 +14,9 @@ import { popupInfo, nameProfile, editButton, popupPlace, formInfo, addButton, fo
 import { config } from '../components/config.js'
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-15',
   headers: {
-    authorization: 'a03634a6-2812-4eb8-85e6-1ba9020a3381',
+    authorization: '529addb6-4b69-4a92-a5e5-18a2a45d6cf3',
     'Content-Type': 'application/json'
   }
 })
