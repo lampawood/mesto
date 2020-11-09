@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && webpack",
-    "dev": "webpack-dev-server --open --watch"
+    "dev": "webpack-dev-server --open --watch",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -13,7 +15,10 @@
   },
   "author": "Katya Ivanova",
   "license": "ISC",
-  "homepage": "https://github.com/lampawood/mesto#readme",
+  "bugs": {
+    "url": "https://github.com/lampawood/mesto/issues"
+  },
+  "homepage": "https://github.com/mesto/",
   "devDependencies": {
     "@babel/core": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
@@ -22,6 +27,7 @@
     "css-loader": "^4.2.0",
     "cssnano": "^4.1.10",
     "file-loader": "^6.0.0",
+    "gh-pages": "^3.1.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
